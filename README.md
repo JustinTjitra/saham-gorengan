@@ -1,4 +1,4 @@
-# saham-gorengan
+# WIP - saham-gorengan
 
 Labelled stock-manipulation cases on the Indonesia Stock Exchange (IDX), taken from OJK enforcement actions from 2016 to November 2026. Also includes the history of the exchange's auto-rejection (ARA/ARB) price limits. The CSVs are plain files you can read directly, and a small Python package (no dependencies) loads them and answers two questions:
 
