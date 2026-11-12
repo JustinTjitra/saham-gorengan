@@ -1,0 +1,22 @@
+regime_id,effective_from,effective_to,price_gt,price_lte,ara_pct,arb_pct,decree,source_url,notes
+R2015-ASYM,2015-08-24,2017-01-02,0,200,35,10,Kep-00096/BEI/08-2015,https://www.hukumonline.com/berita/a/begini-keputusan-baru-bei-soal-iauto-rejection-i-lt5850ea755a9bc/,Lowest tier is stated as Rp50-200.
+R2015-ASYM,2015-08-24,2017-01-02,200,5000,25,10,Kep-00096/BEI/08-2015,https://www.hukumonline.com/berita/a/begini-keputusan-baru-bei-soal-iauto-rejection-i-lt5850ea755a9bc/,
+R2015-ASYM,2015-08-24,2017-01-02,5000,,20,10,Kep-00096/BEI/08-2015,https://www.hukumonline.com/berita/a/begini-keputusan-baru-bei-soal-iauto-rejection-i-lt5850ea755a9bc/,
+R2017-SYM,2017-01-03,2020-03-09,0,200,35,35,Kep-00113/BEI/12-2016,https://www.liputan6.com/saham/read/2677952/bei-ubah-aturan-auto-rejection-mulai-3-januari-2017,Decree dated 2016-12-13.
+R2017-SYM,2017-01-03,2020-03-09,200,5000,25,25,Kep-00113/BEI/12-2016,https://www.liputan6.com/saham/read/2677952/bei-ubah-aturan-auto-rejection-mulai-3-januari-2017,
+R2017-SYM,2017-01-03,2020-03-09,5000,,20,20,Kep-00113/BEI/12-2016,https://www.liputan6.com/saham/read/2677952/bei-ubah-aturan-auto-rejection-mulai-3-januari-2017,
+R2020-ARB10,2020-03-10,2020-03-12,0,200,35,10,Kep-00023/BEI/03-2020,https://pasardana.id/news/2020/3/9/penawaran-beli-jual-bawah-tak-lebih-10-berlaku,Following OJK order S-273/PM.21/2020.
+R2020-ARB10,2020-03-10,2020-03-12,200,5000,25,10,Kep-00023/BEI/03-2020,https://pasardana.id/news/2020/3/9/penawaran-beli-jual-bawah-tak-lebih-10-berlaku,
+R2020-ARB10,2020-03-10,2020-03-12,5000,,20,10,Kep-00023/BEI/03-2020,https://pasardana.id/news/2020/3/9/penawaran-beli-jual-bawah-tak-lebih-10-berlaku,
+R2020-ARB7,2020-03-13,2023-06-04,0,200,35,7,Kep-00025/BEI/03-2020,https://tirto.id/bei-ubah-batas-bawah-auto-rejection-jadi-7-eELq,Tirto cites Kep-00025; Kompas cites Kep-00024 (conflicting). IPO-day limit also cut to 1x.
+R2020-ARB7,2020-03-13,2023-06-04,200,5000,25,7,Kep-00025/BEI/03-2020,https://tirto.id/bei-ubah-batas-bawah-auto-rejection-jadi-7-eELq,
+R2020-ARB7,2020-03-13,2023-06-04,5000,,20,7,Kep-00025/BEI/03-2020,https://tirto.id/bei-ubah-batas-bawah-auto-rejection-jadi-7-eELq,
+R2023-ARB15,2023-06-05,2023-09-03,0,200,35,15,Kep-00055/BEI/03-2023,https://www.cnbcindonesia.com/market/20230605063207-17-442870/ingat-mulai-hari-ini-berlaku-auto-rejection-bawah--arb--15,Normalisation stage I. Decree dated 2023-03-30.
+R2023-ARB15,2023-06-05,2023-09-03,200,5000,25,15,Kep-00055/BEI/03-2023,https://www.cnbcindonesia.com/market/20230605063207-17-442870/ingat-mulai-hari-ini-berlaku-auto-rejection-bawah--arb--15,
+R2023-ARB15,2023-06-05,2023-09-03,5000,,20,15,Kep-00055/BEI/03-2023,https://www.cnbcindonesia.com/market/20230605063207-17-442870/ingat-mulai-hari-ini-berlaku-auto-rejection-bawah--arb--15,
+R2023-SYM,2023-09-04,2025-04-07,0,200,35,35,Kep-00055/BEI/03-2023,https://market.bisnis.com/read/20230831/7/1690253/pertimbangan-bei-kembalikan-aturan-arb-ara-simetris,Normalisation stage II.
+R2023-SYM,2023-09-04,2025-04-07,200,5000,25,25,Kep-00055/BEI/03-2023,https://market.bisnis.com/read/20230831/7/1690253/pertimbangan-bei-kembalikan-aturan-arb-ara-simetris,
+R2023-SYM,2023-09-04,2025-04-07,5000,,20,20,Kep-00055/BEI/03-2023,https://market.bisnis.com/read/20230831/7/1690253/pertimbangan-bei-kembalikan-aturan-arb-ara-simetris,
+R2025-ARB15,2025-04-08,,0,200,35,15,Kep-00003/BEI/04-2025,https://money.kompas.com/read/2025/04/14/225136426/apa-itu-auto-rejection-penjelasan-ara-dan-arb-di-bursa-efek-indonesia,Tariff shock. IHSG trading halt moved to 8%. Open-ended: not verified after April 2025.
+R2025-ARB15,2025-04-08,,200,5000,25,15,Kep-00003/BEI/04-2025,https://money.kompas.com/read/2025/04/14/225136426/apa-itu-auto-rejection-penjelasan-ara-dan-arb-di-bursa-efek-indonesia,
+R2025-ARB15,2025-04-08,,5000,,20,15,Kep-00003/BEI/04-2025,https://money.kompas.com/read/2025/04/14/225136426/apa-itu-auto-rejection-penjelasan-ara-dan-arb-di-bursa-efek-indonesia,

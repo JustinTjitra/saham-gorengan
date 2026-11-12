@@ -1,0 +1,16 @@
+window_id,case_id,ticker,start,end,precision,label_class,confidence,notes
+PANR-2022-1,PANR-2022,PANR,2022-09-06,2023-05-29,day,sanctioned,A,
+DSSA-2024-1,DSSA-2024,DSSA,2024-01-12,2024-01-19,day,sanctioned,B,From news quoting the OJK sanction-detail list.
+DSSA-2024-2,DSSA-2024,DSSA,2024-05-21,2024-07-15,day,sanctioned,B,From news quoting the OJK sanction-detail list.
+DSSA-2024-3,DSSA-2024,DSSA,2024-07-18,2026-02-03,day,sanctioned,B,From news quoting the OJK sanction-detail list.
+FILM-2023-1,FILM-2023,FILM,2023-03-24,2023-07-31,day,sanctioned,B,
+KIOS-2021-1,KIOS-2021,KIOS,2021-01-01,2022-04-30,month,sanctioned,B,Stated as Jan 2021 to Apr 2022.
+SUPR-2022-1,SUPR-2022,SUPR,2022-02-08,2022-04-11,day,sanctioned,C,
+IMPC-2016-1,IMPC-2016,IMPC,2016-01-01,2016-04-30,month,sanctioned,A,Stated as Jan to Apr 2016.
+BVN-2021-AYLS-1,BVN-2021,AYLS,2021-09-01,2021-09-27,day,sanctioned,A,
+BVN-2021-AYLS-2,BVN-2021,AYLS,2021-11-08,2021-12-29,day,sanctioned,A,
+BVN-2021-FILM-1,BVN-2021,FILM,2021-01-12,2021-12-27,day,sanctioned,A,
+BVN-2021-BSML-1,BVN-2021,BSML,2022-03-08,2022-06-17,day,sanctioned,A,
+SHID-2022-1,SHID-2022,SHID,2022-01-03,2022-02-14,day,sanctioned,B,
+SWAT-2018-1,SWAT-2018,SWAT,2018-06-08,2018-07-05,day,alleged,A,OJK also describes it as June to July 2018.
+BEBS-2020-1,BEBS-2020,BEBS,2021-03-10,2022-12-31,year,alleged,C,Stated as 2020 to 2022. Start clipped to the IPO date (2021-03-10) because the shares did not trade before listing; the 2020 part refers to pre-IPO allotment conduct.
