@@ -17,7 +17,7 @@ The loop keeps no memory between runs. Everything it knows is in this repo: `tas
 
 ```bash
 cd <repo>
-git fetch origin main && git checkout main && git reset --hard origin/main
+git checkout main && git pull --ff-only origin main   # if this fails (local changes or divergence), log it and stop; never reset --hard
 git config user.name "JustinTjitra"
 git config user.email "122730410+JustinTjitra@users.noreply.github.com"
 test -d .venv || python3 -m venv .venv
