@@ -105,29 +105,43 @@ def test_court_named_rows_are_unique():
     assert len({(r.ticker, r.scandal) for r in rows}) == len(rows)
 
 
+def _boards(regimes):
+    return sorted({r.board for r in regimes})
+
+
 def test_regimes_are_contiguous_and_only_the_last_is_open(regimes):
-    spans = []
-    for rid in dict.fromkeys(r.regime_id for r in regimes):
-        tiers = [r for r in regimes if r.regime_id == rid]
-        assert len({(t.effective_from, t.effective_to) for t in tiers}) == 1, rid
-        spans.append((rid, tiers[0].effective_from, tiers[0].effective_to))
-    spans.sort(key=lambda s: s[1])
-    for (rid_a, _, end_a), (rid_b, start_b, _) in zip(spans, spans[1:]):
-        assert end_a is not None, rid_a
-        assert end_a + timedelta(days=1) == start_b, (rid_a, rid_b)
-    assert spans[-1][2] is None
+    for board in _boards(regimes):
+        rows = [r for r in regimes if r.board == board]
+        spans = []
+        for rid in dict.fromkeys(r.regime_id for r in rows):
+            tiers = [r for r in rows if r.regime_id == rid]
+            assert len({(t.effective_from, t.effective_to) for t in tiers}) == 1, rid
+            spans.append((rid, tiers[0].effective_from, tiers[0].effective_to))
+        spans.sort(key=lambda s: s[1])
+        for (rid_a, _, end_a), (rid_b, start_b, _) in zip(spans, spans[1:]):
+            assert end_a is not None, rid_a
+            assert end_a + timedelta(days=1) == start_b, (rid_a, rid_b)
+        assert spans[-1][2] is None, board
 
 
 def test_each_regime_covers_every_price_exactly_once(regimes):
-    for rid in dict.fromkeys(r.regime_id for r in regimes):
-        tiers = sorted((r for r in regimes if r.regime_id == rid), key=lambda r: r.price_gt)
-        assert tiers[0].price_gt == 0, rid
-        for a, b in zip(tiers, tiers[1:]):
-            assert a.price_lte == b.price_gt, rid
-        assert tiers[-1].price_lte is None, rid
+    for board in _boards(regimes):
+        rows = [r for r in regimes if r.board == board]
+        for rid in dict.fromkeys(r.regime_id for r in rows):
+            tiers = sorted((r for r in rows if r.regime_id == rid), key=lambda r: r.price_gt)
+            assert tiers[0].price_gt == 0, rid
+            for a, b in zip(tiers, tiers[1:]):
+                assert a.price_lte == b.price_gt, rid
+            assert tiers[-1].price_lte is None, rid
+
+
+def test_exactly_one_limit_kind_per_side(regimes):
+    for r in regimes:
+        assert (r.ara_pct is None) != (r.ara_fixed_idr is None), r.regime_id
+        assert (r.arb_pct is None) != (r.arb_fixed_idr is None), r.regime_id
 
 
 def test_limits_are_plausible_percentages(regimes):
     for r in regimes:
-        assert 0 < r.ara_pct <= 35
-        assert 0 < r.arb_pct <= 35
+        for v in (r.ara_pct, r.arb_pct):
+            assert v is None or 0 < v <= 35

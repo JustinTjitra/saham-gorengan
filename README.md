@@ -30,7 +30,7 @@ labels_on("KIOS", date(2021, 6, 1), precisions={"day"})       # [] : KIOS is mon
 labels_on("SUPR", date(2022, 3, 1), min_confidence="B")       # [] : SUPR is confidence C
 
 price_limits(date(2021, 1, 4), 150)
-# PriceLimits(ara_pct=35, arb_pct=7, regime_id='R2020-ARB7')
+# PriceLimits(regime_id='R2020-ARB7', ara_pct=35, arb_pct=7, ara_fixed_idr=None, arb_fixed_idr=None)
 ```
 
 pandas users can skip the package entirely: `pd.read_csv("data/windows.csv", parse_dates=["start", "end"])`.
@@ -67,6 +67,8 @@ DSSA's case is A, but its three windows are B, because the exact dates come from
 
 ### `price_limit_regimes.csv`
 
+Each row has a `board` (`regular` = main, development and new economy; `acceleration`; `watchlist`). `price_limits(day, ref, board="regular")` only looks at rows of that board. Each side of a row sets exactly one of a percentage (`ara_pct`, `arb_pct`) or a fixed rupiah amount (`ara_fixed_idr`, `arb_fixed_idr`); `PriceLimits.upper(ref)` and `.lower(ref)` apply whichever is set, without tick-size rounding. All rows currently are `regular` with percentage limits.
+
 A tier applies when `price_gt < reference_price <= price_lte`. A blank `price_lte` means no upper bound. `effective_from` and `effective_to` are inclusive. The reference price is the one the limit is measured from, normally the previous close.
 
 | Regime | In force | ARA (Rp50-200 / >200-5,000 / >5,000) | ARB |
@@ -82,7 +84,7 @@ A tier applies when `price_gt < reference_price <= price_lte`. A blank `price_lt
 Why this matters for a detector: return-based features aren't comparable across regimes. With a 7% ARB (2020 to 2023), a crash that would have been one -25% day shows up as several -7% days. Condition on `regime_id`, or normalise each return by the limit in force that day.
 
 **Limitations of the regime table:**
-- **Main and development boards only.** The Acceleration Board and full-call-auction watchlist stocks have different limits. They aren't in the source, so `price_limits()` gives the wrong answer for those stocks.
+- **Regular board only so far.** The schema supports the Acceleration Board and watchlist, but those rows aren't in the data yet, so `price_limits(..., board="acceleration")` raises `ValueError`.
 - **The last regime is open-ended because nothing in the source shows it ending.** The research did not confirm that the April 2025 limits are still in force today.
 - **IPO-day limits and trading-halt thresholds aren't modelled.** They appear only in `notes`.
 

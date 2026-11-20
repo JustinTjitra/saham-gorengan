@@ -2,7 +2,7 @@ from datetime import date
 
 import pytest
 
-from saham_gorengan import labels_on, price_limits
+from saham_gorengan import PriceLimits, labels_on, price_limits
 
 
 # --- price_limits: every regime switch, checked on both sides ---------------
@@ -52,6 +52,23 @@ def test_price_limits_before_coverage_raises():
 def test_price_limits_rejects_non_positive_price():
     with pytest.raises(ValueError):
         price_limits(date(2024, 1, 2), 0)
+
+
+def test_price_limits_unknown_board_raises():
+    with pytest.raises(ValueError):
+        price_limits(date(2024, 1, 2), 100, board="nope")
+
+
+def test_upper_lower_pct():
+    limits = PriceLimits("X", 35, 15, None, None)
+    assert limits.upper(100) == pytest.approx(135)
+    assert limits.lower(100) == pytest.approx(85)
+
+
+def test_upper_lower_fixed():
+    limits = PriceLimits("X", None, None, 1, 1)
+    assert limits.upper(8) == 9
+    assert limits.lower(8) == 7
 
 
 # --- labels_on ----------------------------------------------------------------

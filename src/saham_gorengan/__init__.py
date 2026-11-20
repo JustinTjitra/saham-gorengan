@@ -1,6 +1,7 @@
 """Labelled IDX stock-manipulation cases and ARA/ARB price-limit history."""
 
 from ._load import (
+    BOARDS,
     Case,
     CourtNamed,
     Excluded,
@@ -16,6 +17,7 @@ from ._load import (
 from ._query import PriceLimits, labels_on, price_limits
 
 __all__ = [
+    "BOARDS",
     "Case",
     "CourtNamed",
     "Excluded",

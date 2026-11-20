@@ -12,6 +12,7 @@ LABEL_CLASSES = frozenset({"sanctioned", "alleged"})
 STATUSES = frozenset({"sanctioned", "referred_to_prosecutor", "under_investigation"})
 PRECISIONS = frozenset({"day", "month", "year"})
 CONFIDENCES = ("A", "B", "C")  # best first
+BOARDS = frozenset({"regular", "acceleration", "watchlist"})  # regular = main, development, new economy
 
 
 def data_dir() -> Path:
@@ -106,12 +107,15 @@ class Excluded:
 @dataclass(frozen=True)
 class RegimeTier:
     regime_id: str
+    board: str
     effective_from: date
     effective_to: date | None  # inclusive; None = still in force as far as the source knows
     price_gt: int
     price_lte: int | None  # None = no upper bound
-    ara_pct: int
-    arb_pct: int
+    ara_pct: int | None  # exactly one of ara_pct / ara_fixed_idr is set
+    arb_pct: int | None  # exactly one of arb_pct / arb_fixed_idr is set
+    ara_fixed_idr: int | None
+    arb_fixed_idr: int | None
     decree: str
     source_url: str
     notes: str
@@ -174,23 +178,32 @@ def _excluded() -> tuple[Excluded, ...]:
     return tuple(Excluded(**r) for r in _rows("excluded.csv"))
 
 
+def _regime(r: dict[str, str]) -> RegimeTier:
+    rid = r["regime_id"]
+    _check(r["board"], BOARDS, "board", rid)
+    for side in ("ara", "arb"):
+        if (r[f"{side}_pct"] == "") == (r[f"{side}_fixed_idr"] == ""):
+            raise ValueError(f"{rid}: exactly one of {side}_pct and {side}_fixed_idr must be set")
+    return RegimeTier(
+        regime_id=rid,
+        board=r["board"],
+        effective_from=date.fromisoformat(r["effective_from"]),
+        effective_to=_date(r["effective_to"]),
+        price_gt=int(r["price_gt"]),
+        price_lte=_int(r["price_lte"]),
+        ara_pct=_int(r["ara_pct"]),
+        arb_pct=_int(r["arb_pct"]),
+        ara_fixed_idr=_int(r["ara_fixed_idr"]),
+        arb_fixed_idr=_int(r["arb_fixed_idr"]),
+        decree=r["decree"],
+        source_url=r["source_url"],
+        notes=r["notes"],
+    )
+
+
 @lru_cache(maxsize=None)
 def _regimes() -> tuple[RegimeTier, ...]:
-    return tuple(
-        RegimeTier(
-            regime_id=r["regime_id"],
-            effective_from=date.fromisoformat(r["effective_from"]),
-            effective_to=_date(r["effective_to"]),
-            price_gt=int(r["price_gt"]),
-            price_lte=_int(r["price_lte"]),
-            ara_pct=int(r["ara_pct"]),
-            arb_pct=int(r["arb_pct"]),
-            decree=r["decree"],
-            source_url=r["source_url"],
-            notes=r["notes"],
-        )
-        for r in _rows("price_limit_regimes.csv")
-    )
+    return tuple(_regime(r) for r in _rows("price_limit_regimes.csv"))
 
 
 def load_cases() -> list[Case]:
