@@ -13,6 +13,7 @@ dependencies = ["pandas>=2.0", "numpy>=1.24", "pyarrow>=14"]
 
 [project.optional-dependencies]
 test = ["pytest>=8"]
+yahoo = ["yfinance>=0.2.50", "curl_cffi"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/saham_gorengan"]
