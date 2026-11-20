@@ -9,6 +9,8 @@ Once Q1 is decided, the environment needs the source's hosts allowed. For Yahoo:
 
 Status (planner, 2026-11-20): the owner approved a personal cloud environment `saham-gorengan` that allows the four Yahoo hosts, for both repos. The current planner session could not be moved onto it (a session started by another session can't switch environments), so Yahoo is still unreachable from the loop. Remaining decision: run the scheduled loop in fresh sessions on the `saham-gorengan` environment (this matches LOOP.md's "fresh cloud session every 4 hours"). No current chunk needs the network; P1-09 (backfill) will be the first.
 
+Update (planner, 2026-11-20 17:35): a fresh-session scheduled task created from the planner session failed its test run. It started with no repositories attached and could not attach one, so its push was refused (403). A scheduled task created by a session cannot name repositories. The owner needs to create the scheduled task from the claude.ai scheduled-tasks UI, on the `saham-gorengan` environment, with both repos selected (push access). Until then the original task, which wakes the planner session (no Yahoo access), stays in use.
+
 Answer:
 
 ### Q4. Should the daily watchlist ever be public?
