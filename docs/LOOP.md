@@ -83,7 +83,7 @@ git fetch origin main && git rebase origin/main && .venv/bin/pytest -q
 git push origin main
 ```
 
-Before committing, set the chunk to `done` on the board, add the short commit hash, and append a line to `docs/LOG.md`. If the push is rejected, fetch, rebase, re-run the tests and push again; retry up to 3 times. Never force-push `main`.
+Before committing, set the chunk to `done` on the board, leaving its `commit` cell empty, and append a line to `docs/LOG.md`. A commit can't contain its own hash, so step 8 fills it in. If the push is rejected, fetch, rebase, re-run the tests and push again; retry up to 3 times. Never force-push `main`.
 
 **Data refresh chunks:** when a chunk's job is to run the data pipeline rather than write code, the data goes to the data store described in `docs/PLAN.md`. It never goes to this repo.
 
@@ -93,7 +93,7 @@ Keep at least 3 ready `todo` chunks on the board. When the board runs low, write
 
 ### 8. Log and end
 
-Append a run entry to `docs/LOG.md`: date and time, chunks done, chunks failed or blocked, questions raised, and the last green commit. Commit as `log: run <date>` if anything changed since the last commit, then push.
+Fill the empty `commit` cells of this run's `done` rows with their short hashes (`git log --format=%h --grep "^<id>:" -1`). Append a run entry to `docs/LOG.md`: date and time, chunks done, chunks failed or blocked, questions raised, and the last green commit. Commit as `log: run <date>` if anything changed since the last commit, then push.
 
 ## Sizing rules for chunk specs
 
