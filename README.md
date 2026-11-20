@@ -67,7 +67,7 @@ DSSA's case is A, but its three windows are B, because the exact dates come from
 
 ### `price_limit_regimes.csv`
 
-Each row has a `board` (`regular` = main, development and new economy; `acceleration`; `watchlist`). `price_limits(day, ref, board="regular")` only looks at rows of that board. Each side of a row sets exactly one of a percentage (`ara_pct`, `arb_pct`) or a fixed rupiah amount (`ara_fixed_idr`, `arb_fixed_idr`); `PriceLimits.upper(ref)` and `.lower(ref)` apply whichever is set, without tick-size rounding. All rows currently are `regular`. Most use percentage limits; the Rp1-Rp10 tier (both sides) and the Rp11-14 ARB (from 2026-10-20) are fixed Rp1.
+Each row has a `board` (`regular` = main, development and new economy; `acceleration`; `watchlist`). `price_limits(day, ref, board="regular")` only looks at rows of that board. Each side of a row sets exactly one of a percentage (`ara_pct`, `arb_pct`) or a fixed rupiah amount (`ara_fixed_idr`, `arb_fixed_idr`); `PriceLimits.upper(ref)` and `.lower(ref)` apply whichever is set, without tick-size rounding. Rows are `regular` or `watchlist`; there are none for `acceleration` yet. Most use percentage limits; the Rp1-Rp10 tier (both sides) and the Rp11-14 ARB (from 2026-10-20) are fixed Rp1.
 
 A tier applies when `price_gt < reference_price <= price_lte`. A blank `price_lte` means no upper bound. `effective_from` and `effective_to` are inclusive. The reference price is the one the limit is measured from, normally the previous close.
 
@@ -83,11 +83,12 @@ A tier applies when `price_gt < reference_price <= price_lte`. A blank `price_lt
 | R2026-RP1 | 2026-09-28 to 2026-10-18 | 35 / 25 / 20 (Rp1 fixed up to Rp10) | 15 (Rp1 fixed up to Rp10) |
 | R2026-ARB7A | 2026-10-19 | 35 / 25 / 20 (Rp1 fixed up to Rp10) | 7 (Rp1 fixed up to Rp10) |
 | R2026-ARB7B | 2026-10-20 onward | 35 / 25 / 20 (Rp1 fixed up to Rp10) | 7 (Rp1 fixed up to Rp10); Rp1 fixed for Rp11-14 |
+| R2024-FCA (`watchlist` board) | 2024-03-25 onward | 10 (Rp1 fixed up to Rp10) | 10 (Rp1 fixed up to Rp10) |
 
 Why this matters for a detector: return-based features aren't comparable across regimes. With a 7% ARB (2020 to 2023), a crash that would have been one -25% day shows up as several -7% days. Condition on `regime_id`, or normalise each return by the limit in force that day.
 
 **Limitations of the regime table:**
-- **Regular board only so far.** The schema supports the Acceleration Board and watchlist, but those rows aren't in the data yet, so `price_limits(..., board="acceleration")` raises `ValueError`.
+- **Regular and watchlist boards only.** The Acceleration Board is not yet covered (its launch date is unverified), so `price_limits(..., board="acceleration")` raises `ValueError`. Pass `board="watchlist"` for stocks on the Papan Pemantauan Khusus, which trade by full call auction (R2024-FCA, from 2024-03-25; Stage I of 2023-06-12 traded continuously and is not modelled).
 - **The last regime is open-ended, but it is scheduled to 2026-12-31.** R2026-ARB7B is to be evaluated after that date, and symmetric limits were announced for 2027-01-01. The three 2026 regimes come from news reports; the decree PDFs were not read.
 - **IPO-day limits and trading-halt thresholds aren't modelled.** They appear only in `notes`.
 
@@ -97,7 +98,7 @@ The report in `docs/research/` contradicts itself in a few places. The CSVs foll
 
 1. **Label count.** The report's intro says "10 manipulation labels", but its table has 12 rows. The dataset has 10 cases: 8 sanctioned and 2 alleged. Those 10 cases expand to 15 windows, because some tickers and cases have more than one window.
 2. **Recommendations section.** The report says to "use rows 1, 2 and 6-10 as positive labels with exact dates" and to treat KIOS and IMPC as month-granularity. But IMPC is row 6, and KIOS is row 4. The dataset uses the `precision` column instead: KIOS and IMPC are `month`, BEBS is `year`, and everything else is `day`.
-3. **Number of regime changes.** The report says the ARA/ARB regime changed "five times between 2016 and April 2025", but its own table shows six changes after the 2015 baseline. The dataset has seven regimes.
+3. **Number of regime changes.** The report says the ARA/ARB regime changed "five times between 2016 and April 2025", but its own table shows six changes after the 2015 baseline. The dataset had seven regimes up to April 2025; it now has ten on the regular board (three added for September to October 2026) plus one on the watchlist board.
 4. **BEBS window.** The stated window is 2020 to 2022, but BEBS listed on 2021-03-10. The window starts at the IPO date, because there was no regular-market trading before it.
 5. **DSSA period.** OJK's SP 193 text says 2024 to 2026, and some press coverage says 2023 to 2026. The dataset uses the three exact windows from the sanction list.
 6. **Jiwasraya tickers.** The source the report cites for the AGO's list of 13 stocks has a headline about 13 *corporate suspects* (investment managers). Those tickers are confidence C until the attribution is checked.

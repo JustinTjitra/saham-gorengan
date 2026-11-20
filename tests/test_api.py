@@ -78,6 +78,29 @@ def test_price_limits_unknown_board_raises():
         price_limits(date(2024, 1, 2), 100, board="nope")
 
 
+def test_watchlist_board_fca_low_tier_is_fixed_rp1():
+    limits = price_limits(date(2024, 3, 25), 8, board="watchlist")
+    assert limits.regime_id == "R2024-FCA"
+    assert (limits.ara_pct, limits.arb_pct) == (None, None)
+    assert (limits.ara_fixed_idr, limits.arb_fixed_idr) == (1, 1)
+
+
+def test_watchlist_board_fca_upper_tier_is_10_pct():
+    limits = price_limits(date(2025, 1, 2), 300, board="watchlist")
+    assert (limits.ara_pct, limits.arb_pct) == (10, 10)
+    assert (limits.ara_fixed_idr, limits.arb_fixed_idr) == (None, None)
+
+
+def test_watchlist_board_before_fca_raises():
+    with pytest.raises(ValueError, match="before"):
+        price_limits(date(2024, 3, 22), 300, board="watchlist")
+
+
+def test_acceleration_board_not_covered_yet():
+    with pytest.raises(ValueError):
+        price_limits(date(2025, 1, 2), 300, board="acceleration")
+
+
 def test_upper_lower_pct():
     limits = PriceLimits("X", 35, 15, None, None)
     assert limits.upper(100) == pytest.approx(135)
