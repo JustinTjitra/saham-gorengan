@@ -10,9 +10,9 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 | P0-01 | Regime schema v2: boards and fixed-rupiah limits | P0 | sonnet | none | done | 5f4155a |
 | P0-02 | Regular-board regimes Sep-Nov 2026 | P0 | sonnet | P0-01 | done | 81559d2 |
 | P0-03 | Watchlist-board (full call auction) regime | P0 | sonnet | P0-02 | done | 74936c5 |
-| P0-04 | Tick-size table and helpers | P0 | sonnet | none | done | |
-| P0-05 | Market events table | P0 | haiku | none | done | |
-| P0-06 | Label update: convicted and exchange_review classes | P0 | sonnet | P0-02 | done | |
+| P0-04 | Tick-size table and helpers | P0 | sonnet | none | done | 5153fe9 |
+| P0-05 | Market events table | P0 | haiku | none | done | 02c4df5 |
+| P0-06 | Label update: convicted and exchange_review classes | P0 | sonnet | P0-02 | done | 0906d56 |
 | P0-08 | Loader rejects malformed CSV rows | P0 | sonnet | none | todo | |
 | P1-01 | Canonical bar schema and validate_bars | P1 | sonnet | none | todo | |
 | P1-02 | Month-partitioned Parquet store | P1 | sonnet | P1-01 | todo | |
