@@ -7,9 +7,9 @@ Labelled stock-manipulation cases on the Indonesia Stock Exchange (IDX), taken f
 
 ## Read this before using it as training data
 
-There are **8 sanctioned cases, 13 windows and 9 distinct tickers**. That works as an evaluation set or for case studies. It is far too small to train a supervised detector. Build your detector unsupervised or rule-based, and use these labels to score it.
+There are **13 cases and 18 windows over 14 distinct tickers**: 8 sanctioned, 1 convicted, 1 alleged and 3 exchange_review cases. The default `labels_on()` (sanctioned and convicted) has 14 windows over 10 tickers. That works as an evaluation set or for case studies. It is far too small to train a supervised detector. Build your detector unsupervised or rule-based, and use these labels to score it.
 
-One more limitation. Absence from this list does **not** mean a stock was clean. OJK reported 29 manipulation cases between 2022 and February 2026, but only a handful can be named from public sources. The rest were published only as aggregate totals. Treat unlabelled ticker-days as unknown, not as negatives.
+One more limitation. Absence from this list does **not** mean a stock was clean. OJK reported about 29 to 32 manipulation cases between 2022 and February 2026, but only a handful can be named from public sources. The rest were published only as aggregate totals. Treat unlabelled ticker-days as unknown, not as negatives.
 
 ## Quick start
 
@@ -24,8 +24,10 @@ from saham_gorengan import labels_on, price_limits, load_windows
 labels_on("DSSA", date(2025, 1, 2))
 # [Window(window_id='DSSA-2024-3', case_id='DSSA-2024', ticker='DSSA', ...)]
 
-labels_on("SWAT", date(2018, 6, 20))                          # [] : alleged cases are off by default
-labels_on("SWAT", date(2018, 6, 20), classes={"alleged"})     # [Window(...)]
+labels_on("SWAT", date(2018, 6, 20))                          # [Window(...)] : convicted is on by default
+labels_on("BEBS", date(2021, 6, 1))                           # [] : alleged cases are off by default
+labels_on("BEBS", date(2021, 6, 1), classes={"alleged"})      # [Window(...)]
+labels_on("CASA", date(2026, 10, 28), classes={"exchange_review"})  # [Window(...)] : IDX investigation, not a finding
 labels_on("KIOS", date(2021, 6, 1), precisions={"day"})       # [] : KIOS is month-granularity
 labels_on("SUPR", date(2022, 3, 1), min_confidence="B")       # [] : SUPR is confidence C
 
@@ -54,7 +56,7 @@ pandas users can skip the package entirely: `pd.read_csv("data/windows.csv", par
 | `case_id` | Foreign key into `cases.csv`. One case can cover several tickers (BVN covers AYLS, FILM, BSML), and one ticker can appear in several cases (FILM is in BVN-2021 and FILM-2023). |
 | `start`, `end` | Calendar dates, **both inclusive**. Windows can start or end on non-trading days. |
 | `precision` | `day`: OJK gave exact dates. `month`: only months were stated, stored as first to last day of the month. `year`: only years were stated. |
-| `label_class` | `sanctioned`: administrative sanction issued. `alleged`: criminal track with no verdict yet (SWAT, BEBS). |
+| `label_class` | `sanctioned`: administrative sanction issued. `convicted`: criminal conviction (SWAT, Supreme Court 2026-11-06, single-outlet report). `alleged`: criminal track with no verdict yet (BEBS). `exchange_review`: an IDX public trading investigation (NSSS, FUJI, CASA). These are investigations, not findings of manipulation. `labels_on()` defaults to `sanctioned` and `convicted`; pass `classes=` to add `alleged` or `exchange_review`. |
 | `confidence` | See below. |
 
 ### Confidence tiers
@@ -63,7 +65,7 @@ pandas users can skip the package entirely: `pd.read_csv("data/windows.csv", par
 - **B**: consistent across several news outlets quoting an OJK document that could not be opened directly.
 - **C**: a single outlet or a low-tier aggregator.
 
-DSSA's case is A, but its three windows are B, because the exact dates come from news coverage of OJK's 31 October 2026 sanction list.
+SWAT's conviction is B (single outlet, ruling not yet checked). The exchange_review windows are C. DSSA's case is A, but its three windows are B, because the exact dates come from news coverage of OJK's 31 October 2026 sanction list.
 
 ### `price_limit_regimes.csv`
 
@@ -96,7 +98,7 @@ Why this matters for a detector: return-based features aren't comparable across 
 
 The report in `docs/research/` contradicts itself in a few places. The CSVs follow the reading below:
 
-1. **Label count.** The report's intro says "10 manipulation labels", but its table has 12 rows. The dataset has 10 cases: 8 sanctioned and 2 alleged. Those 10 cases expand to 15 windows, because some tickers and cases have more than one window.
+1. **Label count.** The report's intro says "10 manipulation labels", but its table has 12 rows. The dataset has 13 cases: 8 sanctioned, 1 convicted, 1 alleged and 3 exchange_review. Those 13 cases expand to 18 windows, because some tickers and cases have more than one window.
 2. **Recommendations section.** The report says to "use rows 1, 2 and 6-10 as positive labels with exact dates" and to treat KIOS and IMPC as month-granularity. But IMPC is row 6, and KIOS is row 4. The dataset uses the `precision` column instead: KIOS and IMPC are `month`, BEBS is `year`, and everything else is `day`.
 3. **Number of regime changes.** The report says the ARA/ARB regime changed "five times between 2016 and April 2025", but its own table shows six changes after the 2015 baseline. The dataset had seven regimes up to April 2025; it now has ten on the regular board (three added for September to October 2026) plus one on the watchlist board.
 4. **BEBS window.** The stated window is 2020 to 2022, but BEBS listed on 2021-03-10. The window starts at the IPO date, because there was no regular-market trading before it.
@@ -105,7 +107,7 @@ The report in `docs/research/` contradicts itself in a few places. The CSVs foll
 
 ## Known gaps
 
-- Ticker identities for roughly 24 to 26 of OJK's 29 cases from 2022 to February 2026. The best route to them is an e-PPID information request to OJK.
+- Ticker identities for most of OJK's roughly 29 to 32 cases from 2022 to February 2026. The best route to them is an e-PPID information request to OJK.
 - Release numbers for SHID, KIOS, FILM-2023 and SUPR.
 - The violation type in the IPPE and TDPM sanctions.
 - The full Asabri stock list.

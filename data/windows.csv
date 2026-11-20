@@ -12,5 +12,8 @@ BVN-2021-AYLS-2,BVN-2021,AYLS,2021-11-08,2021-12-29,day,sanctioned,A,
 BVN-2021-FILM-1,BVN-2021,FILM,2021-01-12,2021-12-27,day,sanctioned,A,
 BVN-2021-BSML-1,BVN-2021,BSML,2022-03-08,2022-06-17,day,sanctioned,A,
 SHID-2022-1,SHID-2022,SHID,2022-01-03,2022-02-14,day,sanctioned,B,
-SWAT-2018-1,SWAT-2018,SWAT,2018-06-08,2018-07-05,day,alleged,A,OJK also describes it as June to July 2018.
+SWAT-2018-1,SWAT-2018,SWAT,2018-06-08,2018-07-05,day,convicted,B,OJK also describes it as June to July 2018. Convicted 2026-11-06 (Supreme Court); see case notes.
 BEBS-2020-1,BEBS-2020,BEBS,2021-03-10,2022-12-31,year,alleged,C,Stated as 2020 to 2022. Start clipped to the IPO date (2021-03-10) because the shares did not trade before listing; the 2020 part refers to pre-IPO allotment conduct.
+NSSS-2025-1,NSSS-2025,NSSS,2025-12-01,2026-10-30,day,exchange_review,C,
+FUJI-2026-1,FUJI-2026,FUJI,2026-03-02,2026-10-30,day,exchange_review,C,
+CASA-2026-1,CASA-2026,CASA,2026-10-26,2026-11-02,day,exchange_review,C,about 98% of trading by 6 investors

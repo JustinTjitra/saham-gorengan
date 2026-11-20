@@ -60,14 +60,14 @@ def price_limits(day: date, reference_price: float, board: str = "regular") -> P
 def labels_on(
     ticker: str,
     day: date,
-    classes: Iterable[str] = ("sanctioned",),
+    classes: Iterable[str] = ("sanctioned", "convicted"),
     precisions: Iterable[str] = ("day", "month", "year"),
     min_confidence: str = "C",
 ) -> list[Window]:
-    """Manipulation windows covering ``ticker`` on ``day`` (bounds inclusive).
+    """Labelled windows covering ``ticker`` on ``day`` (bounds inclusive).
 
-    Defaults to sanctioned cases only; pass ``classes={"sanctioned", "alleged"}``
-    to include cases still on the criminal track. ``precisions={"day"}`` drops
+    Defaults to sanctioned and convicted cases; add ``"alleged"`` (criminal track,
+    no verdict) or ``"exchange_review"`` (IDX investigations, not findings) to include them. ``precisions={"day"}`` drops
     windows that OJK stated only to the month or year. ``min_confidence`` keeps
     windows at that tier or better (A > B > C).
     """

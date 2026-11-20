@@ -130,9 +130,15 @@ def test_labels_on_ticker_is_case_insensitive():
     assert labels_on("panr", date(2022, 12, 1))
 
 
-def test_alleged_cases_are_excluded_by_default():
-    assert labels_on("SWAT", date(2018, 6, 20)) == []
-    assert labels_on("SWAT", date(2018, 6, 20), classes={"alleged"})
+def test_default_classes_are_sanctioned_and_convicted():
+    assert labels_on("SWAT", date(2018, 6, 20))
+    assert labels_on("BEBS", date(2021, 6, 1)) == []
+    assert labels_on("BEBS", date(2021, 6, 1), classes={"alleged"})
+
+
+def test_exchange_review_is_opt_in():
+    assert labels_on("CASA", date(2026, 10, 28)) == []
+    assert len(labels_on("CASA", date(2026, 10, 28), classes={"exchange_review"})) == 1
 
 
 def test_filter_by_precision():

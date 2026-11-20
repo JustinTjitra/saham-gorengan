@@ -86,12 +86,22 @@ def test_windows_of_one_case_and_ticker_do_not_overlap(windows):
             assert a.end < b.start, (a.window_id, b.window_id)
 
 
-def test_alleged_cases_are_not_marked_sanctioned(cases):
+ALLOWED_STATUSES = {
+    "sanctioned": {"sanctioned"},
+    "convicted": {"convicted"},
+    "alleged": {"referred_to_prosecutor", "under_investigation"},
+    "exchange_review": {"exchange_investigation"},
+}
+
+
+def test_class_to_status_mapping(cases):
     for c in cases:
-        if c.label_class == "alleged":
-            assert c.status in {"referred_to_prosecutor", "under_investigation"}, c.case_id
-        else:
-            assert c.status == "sanctioned", c.case_id
+        assert c.status in ALLOWED_STATUSES[c.label_class], c.case_id
+
+
+def test_new_label_classes_are_present(cases, windows):
+    assert {c.label_class for c in cases} == set(ALLOWED_STATUSES)
+    assert {w.label_class for w in windows} == set(ALLOWED_STATUSES)
 
 
 def test_excluded_tickers_never_appear_as_labels(windows):

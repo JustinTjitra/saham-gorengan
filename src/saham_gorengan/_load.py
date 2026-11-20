@@ -8,8 +8,16 @@ from datetime import date
 from functools import lru_cache
 from pathlib import Path
 
-LABEL_CLASSES = frozenset({"sanctioned", "alleged"})
-STATUSES = frozenset({"sanctioned", "referred_to_prosecutor", "under_investigation"})
+LABEL_CLASSES = frozenset({"sanctioned", "convicted", "alleged", "exchange_review"})
+STATUSES = frozenset({
+    "sanctioned", "convicted", "referred_to_prosecutor", "under_investigation", "exchange_investigation",
+})
+CLASS_STATUSES = {
+    "sanctioned": frozenset({"sanctioned"}),
+    "convicted": frozenset({"convicted"}),
+    "alleged": frozenset({"referred_to_prosecutor", "under_investigation"}),
+    "exchange_review": frozenset({"exchange_investigation"}),
+}
 PRECISIONS = frozenset({"day", "month", "year"})
 CONFIDENCES = ("A", "B", "C")  # best first
 BOARDS = frozenset({"regular", "acceleration", "watchlist"})  # regular = main, development, new economy
@@ -126,11 +134,15 @@ def _cases() -> tuple[Case, ...]:
     out = []
     for r in _rows("cases.csv"):
         cid = r["case_id"]
+        status = _check(r["status"], STATUSES, "status", cid)
+        label_class = _check(r["label_class"], LABEL_CLASSES, "label_class", cid)
+        if status not in CLASS_STATUSES[label_class]:
+            raise ValueError(f"{cid}: status={status!r} not allowed for label_class={label_class!r}")
         out.append(Case(
             case_id=cid,
             tickers=_split(r["tickers"]),
-            label_class=_check(r["label_class"], LABEL_CLASSES, "label_class", cid),
-            status=_check(r["status"], STATUSES, "status", cid),
+            label_class=label_class,
+            status=status,
             scheme=r["scheme"],
             articles=_split(r["articles"]),
             parties=r["parties"],
@@ -207,7 +219,7 @@ def _regimes() -> tuple[RegimeTier, ...]:
 
 
 def load_cases() -> list[Case]:
-    """One row per enforcement case (sanctioned or alleged)."""
+    """One row per case (sanctioned, convicted, alleged or exchange_review)."""
     return list(_cases())
 
 
