@@ -15,7 +15,7 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 | P0-06 | Label update: convicted and exchange_review classes | P0 | sonnet | P0-02 | done | 0906d56 |
 | P0-08 | Loader rejects malformed CSV rows | P0 | sonnet | none | done | |
 | P1-01 | Canonical bar schema and validate_bars | P1 | sonnet | none | done | |
-| P1-02 | Month-partitioned Parquet store | P1 | sonnet | P1-01 | todo | |
+| P1-02 | Month-partitioned Parquet store | P1 | sonnet | P1-01 | done | |
 | P1-03 | Source protocol and Yahoo adapter (mocked) | P1 | sonnet | P1-01 | todo | |
 | P1-06 | Trading calendar and missing-day flags | P1 | sonnet | P1-01 | todo | |
 | P1-07 | Data-quality flags | P1 | sonnet | P1-01, P0-04 | todo | |
