@@ -8,7 +8,7 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 |---|---|---|---|---|---|---|
 | P0-07 | Task-board consistency test | P0 | sonnet | none | done | 7ef68d2 |
 | P0-01 | Regime schema v2: boards and fixed-rupiah limits | P0 | sonnet | none | done | |
-| P0-02 | Regular-board regimes Sep-Nov 2026 | P0 | sonnet | P0-01 | todo | |
+| P0-02 | Regular-board regimes Sep-Nov 2026 | P0 | sonnet | P0-01 | done | |
 | P0-03 | Watchlist-board (full call auction) regime | P0 | sonnet | P0-02 | todo | |
 | P0-04 | Tick-size table and helpers | P0 | sonnet | none | todo | |
 | P0-05 | Market events table | P0 | haiku | none | todo | |

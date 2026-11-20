@@ -23,12 +23,31 @@ from saham_gorengan import PriceLimits, labels_on, price_limits
         (date(2023, 9, 4), 150, 35, 35),     # stage II symmetric
         (date(2025, 4, 7), 150, 35, 35),
         (date(2025, 4, 8), 150, 35, 15),     # tariff shock
-        (date(2026, 11, 9), 150, 35, 15),    # open-ended regime
+        (date(2026, 9, 25), 150, 35, 15),    # last day of R2025-ARB15
+        (date(2026, 9, 28), 150, 35, 15),    # Rp1 minimum-price regime
+        (date(2026, 10, 16), 150, 35, 15),   # last trading day before ARB 7%
+        (date(2026, 10, 19), 150, 35, 7),    # ARB 7% (one day)
+        (date(2026, 10, 20), 15, 35, 7),     # Rp11-14 band ends at 14
+        (date(2026, 10, 20), 6000, 20, 7),
+        (date(2026, 11, 9), 150, 35, 7),     # open-ended regime
     ],
 )
 def test_price_limits_by_date(day, price, ara, arb):
     limits = price_limits(day, price)
     assert (limits.ara_pct, limits.arb_pct) == (ara, arb)
+
+
+def test_rp1_tier_is_fixed_both_ways():
+    limits = price_limits(date(2026, 9, 28), 8)
+    assert (limits.ara_pct, limits.arb_pct) == (None, None)
+    assert (limits.ara_fixed_idr, limits.arb_fixed_idr) == (1, 1)
+
+
+@pytest.mark.parametrize("price", [12, 14])
+def test_rp11_14_band_has_fixed_arb(price):
+    limits = price_limits(date(2026, 10, 20), price)
+    assert (limits.ara_pct, limits.arb_pct) == (35, None)
+    assert (limits.ara_fixed_idr, limits.arb_fixed_idr) == (None, 1)
 
 
 @pytest.mark.parametrize(

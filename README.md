@@ -67,7 +67,7 @@ DSSA's case is A, but its three windows are B, because the exact dates come from
 
 ### `price_limit_regimes.csv`
 
-Each row has a `board` (`regular` = main, development and new economy; `acceleration`; `watchlist`). `price_limits(day, ref, board="regular")` only looks at rows of that board. Each side of a row sets exactly one of a percentage (`ara_pct`, `arb_pct`) or a fixed rupiah amount (`ara_fixed_idr`, `arb_fixed_idr`); `PriceLimits.upper(ref)` and `.lower(ref)` apply whichever is set, without tick-size rounding. All rows currently are `regular` with percentage limits.
+Each row has a `board` (`regular` = main, development and new economy; `acceleration`; `watchlist`). `price_limits(day, ref, board="regular")` only looks at rows of that board. Each side of a row sets exactly one of a percentage (`ara_pct`, `arb_pct`) or a fixed rupiah amount (`ara_fixed_idr`, `arb_fixed_idr`); `PriceLimits.upper(ref)` and `.lower(ref)` apply whichever is set, without tick-size rounding. All rows currently are `regular`. Most use percentage limits; the Rp1-Rp10 tier (both sides) and the Rp11-14 ARB (from 2026-10-20) are fixed Rp1.
 
 A tier applies when `price_gt < reference_price <= price_lte`. A blank `price_lte` means no upper bound. `effective_from` and `effective_to` are inclusive. The reference price is the one the limit is measured from, normally the previous close.
 
@@ -79,13 +79,16 @@ A tier applies when `price_gt < reference_price <= price_lte`. A blank `price_lt
 | R2020-ARB7 | 2020-03-13 to 2023-06-04 | 35 / 25 / 20 | 7 |
 | R2023-ARB15 | 2023-06-05 to 2023-09-03 | 35 / 25 / 20 | 15 |
 | R2023-SYM | 2023-09-04 to 2025-04-07 | 35 / 25 / 20 | same as ARA |
-| R2025-ARB15 | 2025-04-08 onward | 35 / 25 / 20 | 15 |
+| R2025-ARB15 | 2025-04-08 to 2026-09-27 | 35 / 25 / 20 | 15 |
+| R2026-RP1 | 2026-09-28 to 2026-10-18 | 35 / 25 / 20 (Rp1 fixed up to Rp10) | 15 (Rp1 fixed up to Rp10) |
+| R2026-ARB7A | 2026-10-19 | 35 / 25 / 20 (Rp1 fixed up to Rp10) | 7 (Rp1 fixed up to Rp10) |
+| R2026-ARB7B | 2026-10-20 onward | 35 / 25 / 20 (Rp1 fixed up to Rp10) | 7 (Rp1 fixed up to Rp10); Rp1 fixed for Rp11-14 |
 
 Why this matters for a detector: return-based features aren't comparable across regimes. With a 7% ARB (2020 to 2023), a crash that would have been one -25% day shows up as several -7% days. Condition on `regime_id`, or normalise each return by the limit in force that day.
 
 **Limitations of the regime table:**
 - **Regular board only so far.** The schema supports the Acceleration Board and watchlist, but those rows aren't in the data yet, so `price_limits(..., board="acceleration")` raises `ValueError`.
-- **The last regime is open-ended because nothing in the source shows it ending.** The research did not confirm that the April 2025 limits are still in force today.
+- **The last regime is open-ended, but it is scheduled to 2026-12-31.** R2026-ARB7B is to be evaluated after that date, and symmetric limits were announced for 2027-01-01. The three 2026 regimes come from news reports; the decree PDFs were not read.
 - **IPO-day limits and trading-halt thresholds aren't modelled.** They appear only in `notes`.
 
 ## Where this dataset deviates from the report
