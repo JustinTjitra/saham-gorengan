@@ -7,6 +7,8 @@ The agent loop writes here when it needs a decision, a credential or a network h
 ### Q3. Allow the data hosts in the loop's environment
 Once Q1 is decided, the environment needs the source's hosts allowed. For Yahoo: `query1.finance.yahoo.com`, `query2.finance.yahoo.com`, `fc.yahoo.com`, `guce.yahoo.com`. For Kaggle: `www.kaggle.com`, plus its download host and an API key. For re-verifying rule tables: `www.idx.co.id`, `www.ojk.go.id` (reading pages only, no scraping of data endpoints). This is a settings change you approve.
 
+Status (planner, 2026-11-20): the owner approved a personal cloud environment `saham-gorengan` that allows the four Yahoo hosts, for both repos. The current planner session could not be moved onto it (a session started by another session can't switch environments), so Yahoo is still unreachable from the loop. Remaining decision: run the scheduled loop in fresh sessions on the `saham-gorengan` environment (this matches LOOP.md's "fresh cloud session every 4 hours"). No current chunk needs the network; P1-09 (backfill) will be the first.
+
 Answer:
 
 ### Q4. Should the daily watchlist ever be public?
