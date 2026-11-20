@@ -1,0 +1,9 @@
+band_id,effective_from,effective_to,price_gte,price_lt,tick_idr,decree,source_url,notes
+T2014-1,2014-01-06,2016-05-01,0,500,1,,https://market.bisnis.com/read/20140106/191/195655/kamus-bursa-bei-ubah-fraksi-harga-ini-definisinya,Start date from a single Bisnis report; decree not identified.
+T2014-2,2014-01-06,2016-05-01,500,5000,5,,https://market.bisnis.com/read/20140106/191/195655/kamus-bursa-bei-ubah-fraksi-harga-ini-definisinya,
+T2014-3,2014-01-06,2016-05-01,5000,,25,,https://market.bisnis.com/read/20140106/191/195655/kamus-bursa-bei-ubah-fraksi-harga-ini-definisinya,
+T2016-1,2016-05-02,,0,200,1,Kep-00023/BEI/04-2016,https://market.bisnis.com/read/20160502/190/543637/bei-berlakukan-fraksi-harga-baru-mulai-hari-ini-simak-rincian-perubahannya,Unchanged through at least Feb 2023 per OCBC; no later change found. Whether the 2026 Rp1 floor changed any band is unconfirmed.
+T2016-2,2016-05-02,,200,500,2,Kep-00023/BEI/04-2016,https://market.bisnis.com/read/20160502/190/543637/bei-berlakukan-fraksi-harga-baru-mulai-hari-ini-simak-rincian-perubahannya,
+T2016-3,2016-05-02,,500,2000,5,Kep-00023/BEI/04-2016,https://market.bisnis.com/read/20160502/190/543637/bei-berlakukan-fraksi-harga-baru-mulai-hari-ini-simak-rincian-perubahannya,
+T2016-4,2016-05-02,,2000,5000,10,Kep-00023/BEI/04-2016,https://market.bisnis.com/read/20160502/190/543637/bei-berlakukan-fraksi-harga-baru-mulai-hari-ini-simak-rincian-perubahannya,
+T2016-5,2016-05-02,,5000,,25,Kep-00023/BEI/04-2016,https://market.bisnis.com/read/20160502/190/543637/bei-berlakukan-fraksi-harga-baru-mulai-hari-ini-simak-rincian-perubahannya,

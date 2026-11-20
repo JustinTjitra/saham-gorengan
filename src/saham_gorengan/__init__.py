@@ -15,6 +15,7 @@ from ._load import (
     load_windows,
 )
 from ._query import PriceLimits, labels_on, price_limits
+from .ticks import TickBand, load_tick_sizes, round_to_tick, tick_size
 
 __all__ = [
     "BOARDS",
@@ -23,6 +24,7 @@ __all__ = [
     "Excluded",
     "PriceLimits",
     "RegimeTier",
+    "TickBand",
     "Window",
     "data_dir",
     "labels_on",
@@ -30,6 +32,9 @@ __all__ = [
     "load_court_named",
     "load_excluded",
     "load_regimes",
+    "load_tick_sizes",
     "load_windows",
     "price_limits",
+    "round_to_tick",
+    "tick_size",
 ]
