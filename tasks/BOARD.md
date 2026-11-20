@@ -17,5 +17,8 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 | P1-01 | Canonical bar schema and validate_bars | P1 | sonnet | none | todo | |
 | P1-02 | Month-partitioned Parquet store | P1 | sonnet | P1-01 | todo | |
 | P1-03 | Source protocol and Yahoo adapter (mocked) | P1 | sonnet | P1-01 | todo | |
+| P1-06 | Trading calendar and missing-day flags | P1 | sonnet | P1-01 | todo | |
+| P1-07 | Data-quality flags | P1 | sonnet | P1-01, P0-04 | todo | |
 | P2-00a | Synthetic panel generator with pump injection | P2 | sonnet | P1-01 | todo | |
 | P2-00b | assert_no_lookahead test helper | P2 | sonnet | P2-00a | todo | |
+| P3-03 | Surveillance events schema and reason classifier | P3 | sonnet | none | todo | |
