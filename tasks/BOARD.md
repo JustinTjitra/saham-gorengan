@@ -13,7 +13,7 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 | P0-04 | Tick-size table and helpers | P0 | sonnet | none | done | 5153fe9 |
 | P0-05 | Market events table | P0 | haiku | none | done | 02c4df5 |
 | P0-06 | Label update: convicted and exchange_review classes | P0 | sonnet | P0-02 | done | 0906d56 |
-| P0-08 | Loader rejects malformed CSV rows | P0 | sonnet | none | todo | |
+| P0-08 | Loader rejects malformed CSV rows | P0 | sonnet | none | done | |
 | P1-01 | Canonical bar schema and validate_bars | P1 | sonnet | none | todo | |
 | P1-02 | Month-partitioned Parquet store | P1 | sonnet | P1-01 | todo | |
 | P1-03 | Source protocol and Yahoo adapter (mocked) | P1 | sonnet | P1-01 | todo | |

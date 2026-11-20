@@ -32,8 +32,26 @@ def data_dir() -> Path:
 
 
 def _rows(name: str) -> list[dict[str, str]]:
+    """Rows of data/<name> as dicts. Raises ValueError if any row's field count differs from the header's.
+
+    Line numbers in errors come from `reader.line_num` after the row is read, i.e. the line
+    where the row ends (equals its first line unless a quoted field spans lines).
+    """
     with open(data_dir() / name, newline="", encoding="utf-8") as f:
-        return list(csv.DictReader(f))
+        reader = csv.reader(f)
+        header = next(reader, None)
+        if header is None:
+            return []
+        rows: list[dict[str, str]] = []
+        for fields in reader:
+            if not fields:  # blank line
+                continue
+            if len(fields) != len(header):
+                raise ValueError(
+                    f"{name} line {reader.line_num}: expected {len(header)} fields, got {len(fields)}"
+                )
+            rows.append(dict(zip(header, fields)))
+        return rows
 
 
 def _date(s: str) -> date | None:
