@@ -4,7 +4,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import date
 from string import ascii_uppercase
-from typing import Sequence
+from typing import Callable, Sequence
 
 import numpy as np
 import pandas as pd
@@ -82,3 +82,69 @@ def synthetic_bars(n_tickers: int = 20, start: date = date(2022, 1, 3), end: dat
             "source": "synthetic",
         }))
     return validate_bars(pd.concat(frames, ignore_index=True))
+
+
+def _check_dates(bars: pd.DataFrame, check_dates: Sequence[date] | None, n_checks: int) -> list[pd.Timestamp]:
+    if check_dates is not None:
+        return [pd.Timestamp(d) for d in check_dates]
+    if n_checks < 1:
+        raise ValueError(f"n_checks must be >= 1, got {n_checks}")
+    days = np.sort(bars["date"].unique())
+    days = days[int(len(days) * 0.2):]
+    if len(days) == 0:
+        raise ValueError("bars has no dates to check")
+    idx = np.unique(np.round(np.linspace(0, len(days) - 1, n_checks)).astype(int))
+    idx = np.union1d(idx, [len(days) - 1])
+    return [pd.Timestamp(days[i]) for i in idx]
+
+
+def _is_missing(v) -> bool:
+    return v is None or v is pd.NA or v is pd.NaT or (isinstance(v, float) and v != v)
+
+
+def _same(a, b, atol: float) -> bool:
+    ma, mb = _is_missing(a), _is_missing(b)
+    if ma or mb:
+        return ma and mb
+    num = (bool, int, float, np.bool_, np.integer, np.floating)
+    if isinstance(a, num) and isinstance(b, num):
+        return abs(float(a) - float(b)) <= atol
+    return bool(a == b)
+
+
+def _feature_frame(fn: Callable[[pd.DataFrame], pd.DataFrame], bars: pd.DataFrame) -> pd.DataFrame:
+    out = fn(bars)
+    missing = [c for c in ("date", "ticker") if c not in out.columns]
+    if missing:
+        raise ValueError(f"feature_fn output lacks column(s) {missing}")
+    out = out.copy()
+    out["date"] = pd.to_datetime(out["date"])
+    out["ticker"] = out["ticker"].astype(str)
+    if out.duplicated(["date", "ticker"]).any():
+        raise ValueError("feature_fn output has duplicate (date, ticker) rows")
+    return out
+
+
+def assert_no_lookahead(feature_fn: Callable[[pd.DataFrame], pd.DataFrame], bars: pd.DataFrame,
+                        check_dates: Sequence[date] | None = None, n_checks: int = 5,
+                        atol: float = 1e-9) -> None:
+    """Raise AssertionError if a feature for day D changes when data after D is removed."""
+    dates = _check_dates(bars, check_dates, n_checks)
+    full = _feature_frame(feature_fn, bars)
+    for d in dates:
+        trunc = _feature_frame(feature_fn, bars[bars["date"] <= d].copy())
+        a = full[full["date"] == d].set_index("ticker")
+        b = trunc[trunc["date"] == d].set_index("ticker")
+        for side, have, lack in (("trunc", a, b), ("full", b, a)):
+            gone = sorted(set(have.index) - set(lack.index))
+            if gone:
+                raise AssertionError(
+                    f"lookahead check on {d.date()}: ticker {gone[0]} is missing from the {side} output")
+        cols = [c for c in full.columns if c not in ("date", "ticker")]
+        for tk in sorted(a.index):
+            for c in cols:
+                va, vb = a.at[tk, c], b.at[tk, c]
+                if not _same(va, vb, atol):
+                    raise AssertionError(
+                        f"lookahead in column {c!r} on {d.date()} for {tk}: "
+                        f"full-sample value {va!r} != truncated value {vb!r}")

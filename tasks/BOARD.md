@@ -21,6 +21,6 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 | P1-07 | Data-quality flags | P1 | sonnet | P1-01, P0-04 | done | 7168a8e |
 | P1-08 | Corporate-action suspect flags | P1 | sonnet | P1-07 | done | |
 | P2-00a | Synthetic panel generator with pump injection | P2 | sonnet | P1-01 | done | |
-| P2-00b | assert_no_lookahead test helper | P2 | sonnet | P2-00a | todo | |
+| P2-00b | assert_no_lookahead test helper | P2 | sonnet | P2-00a | done | |
 | P2-01 | Limit-normalised returns, limit hits, ARA run | P2 | sonnet | P1-01 | todo | |
 | P3-03 | Surveillance events schema and reason classifier | P3 | sonnet | none | todo | |
