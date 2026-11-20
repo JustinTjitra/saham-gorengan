@@ -4,14 +4,6 @@ The agent loop writes here when it needs a decision, a credential or a network h
 
 ## Open
 
-### Q1. Which market-data source(s) may the pipeline use?
-IDX's own `GetStockSummary` endpoint is the best free source: one request covers the whole market for a day, and it includes trade frequency and foreign flows. But **IDX's terms of use prohibit scraping**. It also blocks cloud IPs, and the scrapers that still work do so by impersonating a browser to get past Cloudflare. The loop will not build bot-protection evasion. Options:
-- (a) **Recommended:** Yahoo Finance (via yfinance), plus public bulk datasets for history (the Kaggle IDX EOD dataset and `wildangunawan/Dataset-Saham-IDX`, CC BY-NC) for now. Separately, ask IDX in writing for research-use permission, or price an IDX data product. Cost: no trade-frequency or foreign-flow features until then, and weaker coverage of delisted stocks.
-- (b) Owner downloads IDX data from their own machine and drops files into the data store. The loop only parses them.
-- (c) Buy a feed (IDX data products, EODHD, others) now.
-
-Answer:
-
 ### Q2. Where is the private data store?
 Market data can't go in this public repo. Recommended: create a **private** repo, `JustinTjitra/saham-gorengan-data`, and attach it to the loop's environment. The loop writes month-partitioned Parquet there and keeps its history squashable. Alternative: an existing cloud bucket.
 
@@ -28,3 +20,12 @@ Publishing named "suspicious" stocks every day has defamation risk in Indonesia.
 Answer:
 
 ## Resolved
+
+### Q1. Which market-data source(s) may the pipeline use?
+IDX's own `GetStockSummary` endpoint is the best free source: one request covers the whole market for a day, and it includes trade frequency and foreign flows. But **IDX's terms of use prohibit scraping**. It also blocks cloud IPs, and the scrapers that still work do so by impersonating a browser to get past Cloudflare. The loop will not build bot-protection evasion. Options:
+- (a) **Recommended:** Yahoo Finance (via yfinance), plus public bulk datasets for history (the Kaggle IDX EOD dataset and `wildangunawan/Dataset-Saham-IDX`, CC BY-NC) for now. Separately, ask IDX in writing for research-use permission, or price an IDX data product. Cost: no trade-frequency or foreign-flow features until then, and weaker coverage of delisted stocks.
+- (b) Owner downloads IDX data from their own machine and drops files into the data store. The loop only parses them.
+- (c) Buy a feed (IDX data products, EODHD, others) now.
+
+Answer: Yahoo Finance. (Owner, in chat with the planner, 2026-11-20; recorded by the planner.)
+
