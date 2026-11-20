@@ -93,7 +93,7 @@ After each trading day: refresh the data, compute features, score, and write the
 | KSEI / IDX monthly holders above 1% (since Mar 2026) | Ownership concentration | Only from 2026 | Later |
 | Paid: IDX data products, ICE, EODHD, Stockbit (broker summary) | Broker-level data, tick history | Cost | Designed as a plug-in, not planned |
 
-**Data storage:** market data is never committed to this public repo, because the source licences forbid redistributing it. It goes to a **private** data store, Parquet files partitioned by month. Until the owner creates one (Q2), every chunk works offline on fixtures and synthetic panels.
+**Data storage:** market data is never committed to this public repo, because the source licences forbid redistributing it. It goes to the **private** data store, the repo `JustinTjitra/saham-gorengan-data` (Q2), as Parquet files partitioned by month. Check it is still private before writing data to it. Chunks that don't need real data keep working offline on fixtures and synthetic panels.
 
 **Network:** this environment currently allows only package registries. Fetching data needs specific hosts allowed (Q3). Chunks that need the network are marked `blocked` until then.
 

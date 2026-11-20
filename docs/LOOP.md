@@ -85,7 +85,7 @@ git push origin main
 
 Before committing, set the chunk to `done` on the board, leaving its `commit` cell empty, and append a line to `docs/LOG.md`. A commit can't contain its own hash, so step 8 fills it in. If the push is rejected, fetch, rebase, re-run the tests and push again; retry up to 3 times. Never force-push `main`.
 
-**Data refresh chunks:** when a chunk's job is to run the data pipeline rather than write code, the data goes to the data store described in `docs/PLAN.md`. It never goes to this repo.
+**Data refresh chunks:** when a chunk's job is to run the data pipeline rather than write code, the data goes to the data store described in `docs/PLAN.md`. It never goes to this repo. Use a checkout of `JustinTjitra/saham-gorengan-data` outside this repo (for example `../saham-gorengan-data`), set `SAHAM_DATA_DIR` to it, then commit and push the data there with a `data: <what> <date range>` message. Confirm the repo is still private first; stop and ask the owner if it isn't.
 
 ### 7. Plan ahead (planner)
 
