@@ -15,6 +15,8 @@ The loop keeps no memory between runs. Everything it knows is in this repo: `tas
 
 ### 1. Set up (stop the run if any step fails, and log why)
 
+Read `docs/PLANNER_NOTES.md` first: it holds the conventions and review habits earlier runs settled on.
+
 ```bash
 cd <repo>
 git checkout main && git pull --ff-only origin main   # if this fails (local changes or divergence), log it and stop; never reset --hard
