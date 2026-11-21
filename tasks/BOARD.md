@@ -23,8 +23,8 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 | P1-09 | Backfill command (offline-tested) | P1 | sonnet | P1-02, P1-03 | todo | |
 | P2-00a | Synthetic panel generator with pump injection | P2 | sonnet | P1-01 | done | 74fa641 |
 | P2-00b | assert_no_lookahead test helper | P2 | sonnet | P2-00a | done | b22a6b5 |
-| P2-01 | Limit-normalised returns, limit hits, ARA run | P2 | sonnet | P1-01 | done | |
-| P2-03 | Robust volume, turnover and value z-scores | P2 | sonnet | P2-00b | done | |
+| P2-01 | Limit-normalised returns, limit hits, ARA run | P2 | sonnet | P1-01 | done | 76ad918 |
+| P2-03 | Robust volume, turnover and value z-scores | P2 | sonnet | P2-00b | done | f408533 |
 | P2-02 | Market-adjusted abnormal returns | P2 | sonnet | P2-00b | todo | |
 | P2-04 | Run-up and drawdown features | P2 | sonnet | P2-00b | todo | |
-| P3-03 | Surveillance events schema and reason classifier | P3 | sonnet | none | done | |
+| P3-03 | Surveillance events schema and reason classifier | P3 | sonnet | none | done | 46a550c |
