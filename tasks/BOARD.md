@@ -30,7 +30,7 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 | P2-05 | Liquidity measures and liquidity buckets | P2 | sonnet | P2-00b | done | 67d06d5 |
 | P2-06 | Range volatility with limit-day censoring | P2 | sonnet | P2-01 | done | 8a9c1e4 |
 | P2-07 | Trade-size and foreign-flow features (null-safe) | P2 | sonnet | P2-03 | done | f863855 |
-| P2-08 | Feature assembler | P2 | sonnet | P1-08, P2-01, P2-02, P2-03, P2-04, P2-05, P2-06, P2-07 | todo | |
+| P2-08 | Feature assembler | P2 | sonnet | P1-08, P2-01, P2-02, P2-03, P2-04, P2-05, P2-06, P2-07 | done | |
 | P3-01 | Ticker-day label panel | P3 | sonnet | P1-01 | done | 27f9d5c |
 | P3-02 | ARA-run weak label | P3 | sonnet | P2-01 | done | 67e649b |
 | P3-03 | Surveillance events schema and reason classifier | P3 | sonnet | none | done | 46a550c |

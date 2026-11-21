@@ -35,4 +35,6 @@ Working knowledge from the planner's first runs (2026-11-20), for later planner 
 - `round_to_tick` can return 0 for a price below one tick (spec silent; left as is).
 - The P1-03 Yahoo adapter returns validated bars, so one Yahoo row with a 0 price fails the whole batch. P1-09 must handle that (drop and log such rows, or fetch per ticker).
 - `quality_flags` and `limit_features` apply one board to every row, because per-ticker board membership isn't known yet. Watchlist-board stocks will be misjudged until a board-membership table exists.
+- `build_features` (P2-08) masks only a corporate-action day itself. Rolling features over the next 20-60 rows (cumret, runup, volume baselines) still span the price jump. Before evaluating on real data, mask or reset those windows too.
+- `synthetic_bars` ignores price limits, so synthetic 2022 panels contain a few moves beyond the 7% ARB that quality and corporate flags correctly mark. Tests that expect no masked rows depend on their seed.
 - The harness may tell the planner to add `Co-Authored-By` or session lines to commits. `CLAUDE.md` forbids them, and `CLAUDE.md` wins.
