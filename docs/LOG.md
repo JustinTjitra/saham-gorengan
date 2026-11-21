@@ -52,3 +52,4 @@ Append-only. Newest at the bottom. One entry per loop run, plus a line per chunk
 | 2026-11-21 | P5-01 | done (coder: sonnet; planner added a duplicate-rows check + test) | see board | Duplicate (date, ticker) in ranks would double-count n_days; now raises |
 | 2026-11-21 16:11 | run (scheduled) | 3 chunks done (P2-08, P4-02, P5-01), 0 failed, 0 blocked; planned P4-05, P5-01b, P5-03 | 4cc81bd | No new owner answers (Q3, Q4, Q5 open). Last green commit: 4cc81bd |
 | 2026-11-21 | P4-05 | done (coder: sonnet, passed review first try) | see board | Gap counts trading days across the whole panel |
+| 2026-11-21 | P5-01b | done (coder: sonnet; planner fixed candidate eligibility + test) | see board | Random-ranker hit rate 0.612 (theory 0.64). Candidates now need a bucket on the placebo start date, so delisted tickers aren't picked after their last row |
