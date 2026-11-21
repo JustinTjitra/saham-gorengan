@@ -33,4 +33,4 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 | P3-01 | Ticker-day label panel | P3 | sonnet | P1-01 | done | 27f9d5c |
 | P3-02 | ARA-run weak label | P3 | sonnet | P2-01 | done | |
 | P3-03 | Surveillance events schema and reason classifier | P3 | sonnet | none | done | 46a550c |
-| P4-01 | Baseline rankers | P4 | sonnet | P2-01, P2-03 | todo | |
+| P4-01 | Baseline rankers | P4 | sonnet | P2-01, P2-03 | done | |
