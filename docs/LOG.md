@@ -50,3 +50,4 @@ Append-only. Newest at the bottom. One entry per loop run, plus a line per chunk
 | 2026-11-21 | P2-08 | done (coder: sonnet, passed review first try) | see board | 2.4 s for 39k rows. Synthetic panels can break 2022's 7% ARB (generator ignores limits), so a few synthetic rows get masked correctly. Masking blanks only the split day; trailing windows still span the jump (noted in PLANNER_NOTES) |
 | 2026-11-21 | P4-02 | done (coder: sonnet, passed review first try) | see board | Reuses baselines._rank |
 | 2026-11-21 | P5-01 | done (coder: sonnet; planner added a duplicate-rows check + test) | see board | Duplicate (date, ticker) in ranks would double-count n_days; now raises |
+| 2026-11-21 16:11 | run (scheduled) | 3 chunks done (P2-08, P4-02, P5-01), 0 failed, 0 blocked; planned P4-05, P5-01b, P5-03 | 4cc81bd | No new owner answers (Q3, Q4, Q5 open). Last green commit: 4cc81bd |
