@@ -20,13 +20,13 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 | P1-06 | Trading calendar and missing-day flags | P1 | sonnet | P1-01 | done | 832ba7b |
 | P1-07 | Data-quality flags | P1 | sonnet | P1-01, P0-04 | done | 7168a8e |
 | P1-08 | Corporate-action suspect flags | P1 | sonnet | P1-07 | done | edd251a |
-| P1-09 | Backfill command (offline-tested) | P1 | sonnet | P1-02, P1-03 | done | |
+| P1-09 | Backfill command (offline-tested) | P1 | sonnet | P1-02, P1-03 | done | 5959910 |
 | P2-00a | Synthetic panel generator with pump injection | P2 | sonnet | P1-01 | done | 74fa641 |
 | P2-00b | assert_no_lookahead test helper | P2 | sonnet | P2-00a | done | b22a6b5 |
 | P2-01 | Limit-normalised returns, limit hits, ARA run | P2 | sonnet | P1-01 | done | 76ad918 |
 | P2-03 | Robust volume, turnover and value z-scores | P2 | sonnet | P2-00b | done | f408533 |
-| P2-02 | Market-adjusted abnormal returns | P2 | sonnet | P2-00b | done | |
-| P2-04 | Run-up and drawdown features | P2 | sonnet | P2-00b | done | |
+| P2-02 | Market-adjusted abnormal returns | P2 | sonnet | P2-00b | done | 3458774 |
+| P2-04 | Run-up and drawdown features | P2 | sonnet | P2-00b | done | 6e10a0d |
 | P2-05 | Liquidity measures and liquidity buckets | P2 | sonnet | P2-00b | todo | |
 | P2-06 | Range volatility with limit-day censoring | P2 | sonnet | P2-01 | todo | |
 | P3-01 | Ticker-day label panel | P3 | sonnet | P1-01 | todo | |
