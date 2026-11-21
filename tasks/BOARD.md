@@ -39,4 +39,4 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 | P5-01 | Event-level recall, share-in-top-k, lead time | P5 | sonnet | P3-01, P4-01 | done | cfc0a60 |
 | P4-05 | Episode builder | P4 | sonnet | P4-01 | done | |
 | P5-01b | Placebo windows and random-ranker baseline | P5 | sonnet | P5-01 | done | |
-| P5-03 | Synthetic-injection recovery test | P5 | sonnet | P2-08, P4-01, P4-02, P5-01 | todo | |
+| P5-03 | Synthetic-injection recovery test | P5 | sonnet | P2-08, P4-01, P4-02, P5-01 | done | |
