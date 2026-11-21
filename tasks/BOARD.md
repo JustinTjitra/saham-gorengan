@@ -24,4 +24,4 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 | P2-00b | assert_no_lookahead test helper | P2 | sonnet | P2-00a | done | b22a6b5 |
 | P2-01 | Limit-normalised returns, limit hits, ARA run | P2 | sonnet | P1-01 | done | |
 | P2-03 | Robust volume, turnover and value z-scores | P2 | sonnet | P2-00b | done | |
-| P3-03 | Surveillance events schema and reason classifier | P3 | sonnet | none | todo | |
+| P3-03 | Surveillance events schema and reason classifier | P3 | sonnet | none | done | |

@@ -1,0 +1,7 @@
+date,ticker,event_type,reason_class,source,source_url,notes
+2024-03-12,BBBB,suspension,price_up,idx_announcement,https://example.com/announcements/bbbb-suspension,synthetic fixture
+2024-03-05,AAAA,uma,,idx_announcement,https://example.com/announcements/aaaa-uma,synthetic fixture
+2024-03-12,AAAA,watchlist_entry,,manual,https://example.com/announcements/aaaa-watchlist,synthetic fixture
+2024-03-14,BBBB,suspension_lifted,,news,https://example.com/news/bbbb-lifted,synthetic fixture
+2024-03-05,CCCC,notation,,idx_announcement,https://example.com/announcements/cccc-notation,synthetic fixture
+2024-03-05,AAAA,suspension,late_filing,idx_announcement,https://example.com/announcements/aaaa-suspension,synthetic fixture
