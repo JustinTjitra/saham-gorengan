@@ -27,10 +27,10 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 | P2-03 | Robust volume, turnover and value z-scores | P2 | sonnet | P2-00b | done | f408533 |
 | P2-02 | Market-adjusted abnormal returns | P2 | sonnet | P2-00b | done | 3458774 |
 | P2-04 | Run-up and drawdown features | P2 | sonnet | P2-00b | done | 6e10a0d |
-| P2-05 | Liquidity measures and liquidity buckets | P2 | sonnet | P2-00b | done | |
-| P2-06 | Range volatility with limit-day censoring | P2 | sonnet | P2-01 | done | |
+| P2-05 | Liquidity measures and liquidity buckets | P2 | sonnet | P2-00b | done | 67d06d5 |
+| P2-06 | Range volatility with limit-day censoring | P2 | sonnet | P2-01 | done | 8a9c1e4 |
 | P2-07 | Trade-size and foreign-flow features (null-safe) | P2 | sonnet | P2-03 | todo | |
-| P3-01 | Ticker-day label panel | P3 | sonnet | P1-01 | done | |
+| P3-01 | Ticker-day label panel | P3 | sonnet | P1-01 | done | 27f9d5c |
 | P3-02 | ARA-run weak label | P3 | sonnet | P2-01 | todo | |
 | P3-03 | Surveillance events schema and reason classifier | P3 | sonnet | none | done | 46a550c |
 | P4-01 | Baseline rankers | P4 | sonnet | P2-01, P2-03 | todo | |
