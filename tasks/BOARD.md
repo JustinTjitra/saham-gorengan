@@ -27,4 +27,7 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 | P2-03 | Robust volume, turnover and value z-scores | P2 | sonnet | P2-00b | done | f408533 |
 | P2-02 | Market-adjusted abnormal returns | P2 | sonnet | P2-00b | done | |
 | P2-04 | Run-up and drawdown features | P2 | sonnet | P2-00b | done | |
+| P2-05 | Liquidity measures and liquidity buckets | P2 | sonnet | P2-00b | todo | |
+| P2-06 | Range volatility with limit-day censoring | P2 | sonnet | P2-01 | todo | |
+| P3-01 | Ticker-day label panel | P3 | sonnet | P1-01 | todo | |
 | P3-03 | Surveillance events schema and reason classifier | P3 | sonnet | none | done | 46a550c |

@@ -18,6 +18,15 @@ Publishing named "suspicious" stocks every day has defamation risk in Indonesia.
 
 Answer:
 
+### Q5. Where should the ticker universe come from?
+The backfill (P1-09) needs the list of IDX tickers to fetch, including stocks that have since delisted. Without the delisted ones, the history is survivorship-biased, and pumped stocks are over-represented among delistings. Yahoo has no listing endpoint. Options:
+- (a) **Recommended:** you supply a CSV of tickers with listing and delisting dates (for example, exported from your broker app, or from IDX's public company list, downloaded by hand in a browser). The loop only reads it.
+- (b) Current listings only, from a hand-made list. Simple, but biased; delisted pumps are missed.
+- (c) Ask IDX in writing for research-use permission (as in Q1), then fetch their list programmatically.
+The loop will not scrape idx.co.id (see Q1).
+
+Answer:
+
 ## Resolved
 
 ### Q2. Where is the private data store?
