@@ -37,3 +37,4 @@ Append-only. Newest at the bottom. One entry per loop run, plus a line per chunk
 | 2026-11-21 00:11 | run (scheduled) | 3 chunks done (P2-01, P2-03, P3-03), 0 failed, 0 blocked; planned P1-09, P2-02, P2-04 | 68db6ed | No new owner answers. P1-09 is code only; running the backfill still needs a session with Yahoo access (Q3). Last green commit: 68db6ed |
 | 2026-11-21 | P1-09 | done (coder: sonnet, passed review first try) | see board | Offline-tested only. State file at <store>/state/backfill.json, written after each month. Running it needs Yahoo access (Q3) and a ticker universe (not yet specced) |
 | 2026-11-21 | P2-02 | done (coder: sonnet, passed review) | see board | Coder skipped test-first; planner checked the tests instead by mutating leave-one-out to a plain mean (caught: 1 failure) |
+| 2026-11-21 | P2-04 | done (coder: sonnet, passed review first try) | see board | Test-first confirmed this time (collection error before the module existed) |

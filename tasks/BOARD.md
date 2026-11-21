@@ -26,5 +26,5 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 | P2-01 | Limit-normalised returns, limit hits, ARA run | P2 | sonnet | P1-01 | done | 76ad918 |
 | P2-03 | Robust volume, turnover and value z-scores | P2 | sonnet | P2-00b | done | f408533 |
 | P2-02 | Market-adjusted abnormal returns | P2 | sonnet | P2-00b | done | |
-| P2-04 | Run-up and drawdown features | P2 | sonnet | P2-00b | todo | |
+| P2-04 | Run-up and drawdown features | P2 | sonnet | P2-00b | done | |
 | P3-03 | Surveillance events schema and reason classifier | P3 | sonnet | none | done | 46a550c |
