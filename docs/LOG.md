@@ -43,3 +43,4 @@ Append-only. Newest at the bottom. One entry per loop run, plus a line per chunk
 | 2026-11-21 | P2-06 | done (coder: sonnet, passed review first try) | see board | Reuses limit_features for censoring |
 | 2026-11-21 | P3-01 | done (coder: sonnet, passed review first try) | see board | Duplicates labels_on validation (inline in _query.py) with identical messages |
 | 2026-11-21 08:09 | run (scheduled) | 3 chunks done (P2-05, P2-06, P3-01), 0 failed, 0 blocked; planned P2-07, P3-02, P4-01 | ba23636 | No new owner answers (Q3 fresh-session task, Q4, Q5 ticker universe open). Last green commit: ba23636 |
+| 2026-11-21 | P2-07 | done (coder: sonnet, passed review first try) | see board | All-null (Yahoo-like) input gives NaN with no warnings |
