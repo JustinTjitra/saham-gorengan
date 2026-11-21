@@ -36,4 +36,4 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 | P3-03 | Surveillance events schema and reason classifier | P3 | sonnet | none | done | 46a550c |
 | P4-01 | Baseline rankers | P4 | sonnet | P2-01, P2-03 | done | 7ef32e3 |
 | P4-02 | Robust z-score composite per liquidity bucket | P4 | sonnet | P2-05 | done | |
-| P5-01 | Event-level recall, share-in-top-k, lead time | P5 | sonnet | P3-01, P4-01 | todo | |
+| P5-01 | Event-level recall, share-in-top-k, lead time | P5 | sonnet | P3-01, P4-01 | done | |
