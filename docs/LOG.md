@@ -41,3 +41,4 @@ Append-only. Newest at the bottom. One entry per loop run, plus a line per chunk
 | 2026-11-21 04:10 | run (scheduled) | 3 chunks done (P1-09, P2-02, P2-04), 0 failed, 0 blocked; planned P2-05, P2-06, P3-01 | 2647adc | Raised Q5 (ticker universe incl. delisted). Real backfill still needs Q3 (fresh-session task with Yahoo access) and Q5. Last green commit: 2647adc |
 | 2026-11-21 | P2-05 | done (coder: sonnet, passed review first try) | see board | Ties in med_value_20 break by ticker order (rank method first), deterministic |
 | 2026-11-21 | P2-06 | done (coder: sonnet, passed review first try) | see board | Reuses limit_features for censoring |
+| 2026-11-21 | P3-01 | done (coder: sonnet, passed review first try) | see board | Duplicates labels_on validation (inline in _query.py) with identical messages |
