@@ -20,7 +20,7 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 | P1-06 | Trading calendar and missing-day flags | P1 | sonnet | P1-01 | done | 832ba7b |
 | P1-07 | Data-quality flags | P1 | sonnet | P1-01, P0-04 | done | 7168a8e |
 | P1-08 | Corporate-action suspect flags | P1 | sonnet | P1-07 | done | edd251a |
-| P1-09 | Backfill command (offline-tested) | P1 | sonnet | P1-02, P1-03 | todo | |
+| P1-09 | Backfill command (offline-tested) | P1 | sonnet | P1-02, P1-03 | done | |
 | P2-00a | Synthetic panel generator with pump injection | P2 | sonnet | P1-01 | done | 74fa641 |
 | P2-00b | assert_no_lookahead test helper | P2 | sonnet | P2-00a | done | b22a6b5 |
 | P2-01 | Limit-normalised returns, limit hits, ARA run | P2 | sonnet | P1-01 | done | 76ad918 |
