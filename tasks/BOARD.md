@@ -41,7 +41,7 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 | P5-01 | Event-level recall, share-in-top-k, lead time | P5 | sonnet | P3-01, P4-01 | done | cfc0a60 |
 | P4-05 | Episode builder | P4 | sonnet | P4-01 | done | 228cf5e |
 | P5-01b | Placebo windows and random-ranker baseline | P5 | sonnet | P5-01 | done | edd5f7a |
-| P5-02 | Leave-one-case-out splits with embargo | P5 | sonnet | P5-01 | todo | |
+| P5-02 | Leave-one-case-out splits with embargo | P5 | sonnet | P5-01 | done | |
 | P5-03 | Synthetic-injection recovery test | P5 | sonnet | P2-08, P4-01, P4-02, P5-01 | done | 1e27df2 |
 | P5-03b | Recovery difficulty sweep with random baseline | P5 | sonnet | P5-03, P5-01b | done | e5ebbd3 |
 | P5-04 | Alert-burden and weak-label overlap metrics | P5 | sonnet | P5-01 | done | 3018c8e |
