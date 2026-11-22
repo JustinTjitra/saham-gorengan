@@ -37,4 +37,6 @@ Working knowledge from the planner's first runs (2026-11-20), for later planner 
 - `quality_flags` and `limit_features` apply one board to every row, because per-ticker board membership isn't known yet. Watchlist-board stocks will be misjudged until a board-membership table exists.
 - `build_features` (P2-08) masks only a corporate-action day itself. Rolling features over the next 20-60 rows (cumret, runup, volume baselines) still span the price jump. Before evaluating on real data, mask or reset those windows too.
 - `synthetic_bars` ignores price limits, so synthetic 2022 panels contain a few moves beyond the 7% ARB that quality and corporate flags correctly mark. Tests that expect no masked rows depend on their seed.
+- The P5-03b recovery sweep makes the test suite take about 70 s (the sweep alone about 50 s). If the suite gets much slower, move the sweep behind a pytest marker rather than shrinking it.
+- Sweep finding to carry into real-data evaluation: every detector so far relies on volume. Slow price-only pumps (0.5-1%/day at normal volume) are at chance level.
 - The harness may tell the planner to add `Co-Authored-By` or session lines to commits. `CLAUDE.md` forbids them, and `CLAUDE.md` wins.
