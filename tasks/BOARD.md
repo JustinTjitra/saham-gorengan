@@ -42,4 +42,4 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 | P5-03 | Synthetic-injection recovery test | P5 | sonnet | P2-08, P4-01, P4-02, P5-01 | done | 1e27df2 |
 | P5-03b | Recovery difficulty sweep with random baseline | P5 | sonnet | P5-03, P5-01b | done | |
 | P5-04 | Alert-burden and weak-label overlap metrics | P5 | sonnet | P5-01 | done | |
-| P4-03 | Isolation forest per bucket, walk-forward | P4 | sonnet | P4-02 | todo | |
+| P4-03 | Isolation forest per bucket, walk-forward | P4 | sonnet | P4-02 | done | |
