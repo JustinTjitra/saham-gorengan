@@ -30,6 +30,10 @@ Working knowledge from the planner's first runs (2026-11-20), for later planner 
 - Look for performance traps in panel code (a filter inside a per-ticker loop, unbounded `lru_cache`). The real panel is about 900 tickers over many years.
 - Coders report "ambiguities" at the end; read them, because two of them were real bugs (a stale note, a NaT date accepted).
 
+## Offline backlog (2026-11-22)
+
+After P5-02 and P4-04 there is no PLAN.md item left that is worth building on synthetic data alone. Everything after that needs real bars (Q3 and Q5) or an owner decision (Q4). When the board has nothing ready, don't invent chunks to fill the three-chunk minimum: log that the run is idle and why, and say so in the summary.
+
 ## Known risks to carry forward
 
 - Shell chains like `pytest -q | tail -1 && git commit` commit even when tests fail, because the pipe returns tail's exit code. Use `set -o pipefail`, or run pytest without a pipe, before any commit or push (this nearly pushed a red tree on 2026-11-22).
