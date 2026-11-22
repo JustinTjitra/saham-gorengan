@@ -21,6 +21,7 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 | P1-07 | Data-quality flags | P1 | sonnet | P1-01, P0-04 | done | 7168a8e |
 | P1-08 | Corporate-action suspect flags | P1 | sonnet | P1-07 | done | edd251a |
 | P1-09 | Backfill command (offline-tested) | P1 | sonnet | P1-02, P1-03 | done | 5959910 |
+| P1-10 | Ticker-universe file loader and fetch plan | P1 | sonnet | P1-09 | todo | |
 | P2-00a | Synthetic panel generator with pump injection | P2 | sonnet | P1-01 | done | 74fa641 |
 | P2-00b | assert_no_lookahead test helper | P2 | sonnet | P2-00a | done | b22a6b5 |
 | P2-01 | Limit-normalised returns, limit hits, ARA run | P2 | sonnet | P1-01 | done | 76ad918 |
@@ -45,7 +46,9 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 | P5-04 | Alert-burden and weak-label overlap metrics | P5 | sonnet | P5-01 | done | 3018c8e |
 | P4-03 | Isolation forest per bucket, walk-forward | P4 | sonnet | P4-02 | done | b68ce35 |
 | P4-06 | Rank ensemble | P4 | sonnet | P4-01, P4-02, P4-03 | done | 207c96d |
-| P4-07 | Price-only trend-persistence detector | P4 | sonnet | P4-01, P5-03b | done | |
+| P4-07 | Price-only trend-persistence detector | P4 | sonnet | P4-01, P5-03b | done | de6cd5d |
 | P5-05 | Evaluation report generator | P5 | sonnet | P5-01, P5-01b, P5-04 | done | a92e182 |
-| P5-06 | Evaluation pipeline from features and windows to report inputs | P5 | sonnet | P5-05, P4-06 | done | |
-| P6-01 | `saham-gorengan score --date` command | P6 | sonnet | P1-02, P2-09, P4-02 | done | |
+| P5-06 | Evaluation pipeline from features and windows to report inputs | P5 | sonnet | P5-05, P4-06 | done | 34a611d |
+| P5-07 | Report recall by price-limit regime | P5 | sonnet | P5-05 | todo | |
+| P6-01 | `saham-gorengan score --date` command | P6 | sonnet | P1-02, P2-09, P4-02 | done | e0807e3 |
+| P6-02 | Watchlist writer with explanations and wording rules | P6 | sonnet | P6-01 | todo | |
