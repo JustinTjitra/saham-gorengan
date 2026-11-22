@@ -9,6 +9,7 @@ import pandas as pd
 
 from ..detectors.baselines import baseline_scores
 from ..detectors.composite import composite_scores
+from ..detectors.trend import trend_scores
 from ..features.assemble import build_features
 from ..testing import Pump, synthetic_bars
 from .metrics import recall_at_k, window_metrics
@@ -20,7 +21,8 @@ _SPAN = 15  # default Pump: 10 pump days + 5 dump days
 
 def run_recovery(seed: int = 0, n_tickers: int = 60, n_pumps: int = 6, k: int = 10, lead: int = 0,
                  start: date = date(2024, 1, 2), end: date = date(2024, 12, 31), daily_return: float = 0.15,
-                 volume_mult: float = 8.0, include_random: bool = False) -> dict[str, float]:
+                 volume_mult: float = 8.0, include_random: bool = False,
+                 include_trend: bool = False) -> dict[str, float]:
     """Returns recall@k per detector: {"rank_ret", "rank_vol", "rank_rule", "composite"}.
 
     Injects ``n_pumps`` default-parameter pump-and-dump episodes into a synthetic panel, runs
@@ -28,6 +30,7 @@ def run_recovery(seed: int = 0, n_tickers: int = 60, n_pumps: int = 6, k: int = 
     (first pump day to last dump day, 15 trading days). ``daily_return`` and ``volume_mult``
     set the pump strength (dump return is -0.8 * daily_return). With ``include_random`` the
     result also has "random": a per-date permutation of the composite ranks, same scoring.
+    With ``include_trend`` the result also has "rank_trend" (price-only trend_scores, defaults).
 
     The default dates are in 2024 on purpose: in 2022 the 7% ARB would make the synthetic dump
     days (-12%) look like corporate actions, and P2-08 would mask them.
@@ -64,6 +67,8 @@ def run_recovery(seed: int = 0, n_tickers: int = 60, n_pumps: int = 6, k: int = 
         "rank_rule": base[["date", "ticker", "rank_rule"]].rename(columns={"rank_rule": "rank"}),
         "composite": comp[["date", "ticker", "rank"]],
     }
+    if include_trend:
+        ranks["rank_trend"] = trend_scores(features[["date", "ticker", "ret"]])[["date", "ticker", "rank"]]
     if include_random:
         ranks["random"] = random_ranks(ranks["composite"], seed=seed)
     return {name: float(recall_at_k(window_metrics(r, windows, k=k, lead=lead)))

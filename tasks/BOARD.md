@@ -45,7 +45,7 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 | P5-04 | Alert-burden and weak-label overlap metrics | P5 | sonnet | P5-01 | done | 3018c8e |
 | P4-03 | Isolation forest per bucket, walk-forward | P4 | sonnet | P4-02 | done | b68ce35 |
 | P4-06 | Rank ensemble | P4 | sonnet | P4-01, P4-02, P4-03 | done | 207c96d |
-| P4-07 | Price-only trend-persistence detector | P4 | sonnet | P4-01, P5-03b | todo | |
+| P4-07 | Price-only trend-persistence detector | P4 | sonnet | P4-01, P5-03b | done | |
 | P5-05 | Evaluation report generator | P5 | sonnet | P5-01, P5-01b, P5-04 | done | a92e182 |
 | P5-06 | Evaluation pipeline from features and windows to report inputs | P5 | sonnet | P5-05, P4-06 | done | |
 | P6-01 | `saham-gorengan score --date` command | P6 | sonnet | P1-02, P2-09, P4-02 | todo | |
