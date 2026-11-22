@@ -45,4 +45,4 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 | P5-04 | Alert-burden and weak-label overlap metrics | P5 | sonnet | P5-01 | done | 3018c8e |
 | P4-03 | Isolation forest per bucket, walk-forward | P4 | sonnet | P4-02 | done | b68ce35 |
 | P4-06 | Rank ensemble | P4 | sonnet | P4-01, P4-02, P4-03 | done | |
-| P5-05 | Evaluation report generator | P5 | sonnet | P5-01, P5-01b, P5-04 | todo | |
+| P5-05 | Evaluation report generator | P5 | sonnet | P5-01, P5-01b, P5-04 | done | |
