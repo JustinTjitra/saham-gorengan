@@ -32,11 +32,13 @@ Working knowledge from the planner's first runs (2026-11-20), for later planner 
 
 ## Known risks to carry forward
 
+- Shell chains like `pytest -q | tail -1 && git commit` commit even when tests fail, because the pipe returns tail's exit code. Use `set -o pipefail`, or run pytest without a pipe, before any commit or push (this nearly pushed a red tree on 2026-11-22).
+
 - `round_to_tick` can return 0 for a price below one tick (spec silent; left as is).
 - The P1-03 Yahoo adapter returns validated bars, so one Yahoo row with a 0 price fails the whole batch. P1-09 must handle that (drop and log such rows, or fetch per ticker).
 - `quality_flags` and `limit_features` apply one board to every row, because per-ticker board membership isn't known yet. Watchlist-board stocks will be misjudged until a board-membership table exists.
 - Corporate-action days: P2-08 masks the day itself, and P2-09 masks `WINDOW_FEATURES` on the next 60 rows (`post_masked`). Detection is blind for about three months after every split or rights issue; that is the price of not adjusting prices.
 - `synthetic_bars` ignores price limits, so synthetic 2022 panels contain a few moves beyond the 7% ARB that quality and corporate flags correctly mark. Tests that expect no masked rows depend on their seed.
 - The P5-03b recovery sweep makes the test suite take about 70 s (the sweep alone about 50 s). If the suite gets much slower, move the sweep behind a pytest marker rather than shrinking it.
-- Sweep finding to carry into real-data evaluation: every detector so far relies on volume. Slow price-only pumps (0.5-1%/day at normal volume) are at chance level. P4-07 (trend t-statistic) targets this.
+- Sweep finding to carry into real-data evaluation: every detector so far relies on volume. Slow price-only pumps (0.5-1%/day at normal volume) are at chance level. P4-07 (trend t-statistic) did not help: it matched the composite at every strength. A 1%/day drift in 2% daily noise is near the detection limit for a top-5-of-150 list, so don't spend more chunks on price-only detectors before real data shows whether such pumps exist in the labelled cases.
 - The harness may tell the planner to add `Co-Authored-By` or session lines to commits. `CLAUDE.md` forbids them, and `CLAUDE.md` wins.
