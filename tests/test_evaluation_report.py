@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
 
-from saham_gorengan.evaluation.report import DetectorResult, render_report
+from saham_gorengan.evaluation.report import DetectorResult, render_report, window_strata
 
 
 def _m(rows):
@@ -106,3 +106,63 @@ def test_bad_input():
     dup.case_metrics = pd.concat([dup.case_metrics, dup.case_metrics.iloc[:1]])
     with pytest.raises(ValueError):
         render_report([dup], k=25, lead=20)
+
+
+_NO_STRATA_EXPECTED = (
+    "# Evaluation\n\nTop-k with k=25, lead=20 trading days. Results are statistical anomaly "
+    "detection on labelled cases, not findings.\n\n"
+    "| detector | recall cases | recall placebo | recall random | median share | median offset "
+    "| flags/day | distinct tickers |\n"
+    "|---|---|---|---|---|---|---|---|\n"
+    "| A | 0.67 | 0.50 | 0.00 | 0.50 | -0.5 | 3.50 | 12 |\n"
+    "| B | 0.33 | n/a | 0.00 | 0.00 | 4 | 1.00 | n/a |\n\n"
+    "| window_id | ticker | A found | A offset | B found | B offset |\n"
+    "|---|---|---|---|---|---|\n"
+    "| W1 | AAAA | yes | -3 | no | n/a |\n"
+    "| W2 | BBBB | yes | 2 | yes | 4 |\n"
+    "| W3 | CCCC | no | n/a | no | n/a |\n\n"
+    "Placebo and random baselines are mandatory comparisons (PLAN.md 3.4); "
+    "a detector is only useful where it clearly beats both.\n"
+)
+
+
+def test_window_strata():
+    w = pd.DataFrame({
+        "window_id": ["X1", "X2", "X3"],
+        "start": pd.to_datetime(["2021-06-01", "2024-06-03", "2000-01-03"]),
+    })
+    assert window_strata(w) == {"X1": "ARB 7%", "X2": "other", "X3": "unknown"}
+    with pytest.raises(ValueError):
+        window_strata(pd.concat([w, w.iloc[:1]]))
+
+
+def test_strata_table():
+    strata = {"W1": "ARB 7%", "W2": "ARB 7%", "W3": "other"}
+    out = render_report([_a(), _b()], k=25, lead=20, strata=strata)
+    rows = _rows(out)
+    i = [n for n, r in enumerate(rows) if r.startswith("| detector | ARB")][0]
+    assert rows[i] == "| detector | ARB 7% | other |"
+    assert rows[i + 2] == "| A | 1.00 (n=2) | 0.00 (n=1) |"
+    assert rows[i + 3] == "| B | 0.50 (n=2) | 0.00 (n=1) |"
+    assert "## Recall by price-limit regime" in out
+    assert out.index("| W3 |") < out.index("## Recall by price-limit regime") < out.index("Placebo and random")
+
+
+def test_strata_n_zero_and_order():
+    a = _a()
+    a.case_metrics.loc[a.case_metrics["window_id"] == "W3", "n_days"] = 0
+    strata = {"W1": "unknown", "W2": "ARB 7%", "W3": "other"}
+    out = render_report([a], k=25, lead=20, strata=strata)
+    rows = _rows(out)
+    i = [n for n, r in enumerate(rows) if r.startswith("| detector | ARB")][0]
+    assert rows[i] == "| detector | ARB 7% | other | unknown |"
+    assert rows[i + 2] == "| A | 1.00 (n=1) | n/a (n=0) | 1.00 (n=1) |"
+
+
+def test_no_strata_unchanged():
+    assert render_report([_a(), _b()], k=25, lead=20) == _NO_STRATA_EXPECTED
+
+
+def test_strata_missing_window():
+    with pytest.raises(ValueError):
+        render_report([_a(), _b()], k=25, lead=20, strata={"W1": "ARB 7%", "W2": "ARB 7%"})

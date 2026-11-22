@@ -3,15 +3,17 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
-from typing import Sequence
+from typing import Mapping, Sequence
 
 import pandas as pd
 
+from saham_gorengan._query import price_limits
 from saham_gorengan.evaluation.metrics import recall_at_k
 
 NOTE = ("Placebo and random baselines are mandatory comparisons (PLAN.md 3.4); "
         "a detector is only useful where it clearly beats both.")
 _NA = "n/a"
+_STRATA_ORDER = ("ARB 7%", "other", "unknown")
 
 
 @dataclass
@@ -65,7 +67,45 @@ def _check(results: Sequence[DetectorResult]) -> list[str]:
     return ref
 
 
-def render_report(results: Sequence[DetectorResult], k: int, lead: int, title: str = "Evaluation") -> str:
+def window_strata(windows: pd.DataFrame) -> dict[str, str]:
+    """Map window_id -> "ARB 7%" | "other" | "unknown" from the price-limit regime at window start."""
+    ids = [str(x) for x in windows["window_id"]]
+    if len(set(ids)) != len(ids):
+        raise ValueError("duplicate window_id in windows")
+    out: dict[str, str] = {}
+    for wid, start in zip(ids, windows["start"]):
+        try:
+            arb = price_limits(pd.Timestamp(start).date(), 1000.0, "regular").arb_pct
+        except ValueError:
+            out[wid] = "unknown"
+            continue
+        out[wid] = "ARB 7%" if arb == 7 else "other"
+    return out
+
+
+def _strata_section(results: Sequence[DetectorResult], window_ids: list[str],
+                    strata: Mapping[str, str]) -> list[str]:
+    missing = [w for w in window_ids if w not in strata]
+    if missing:
+        raise ValueError(f"strata missing window_ids: {missing}")
+    present = [s for s in _STRATA_ORDER if any(strata[w] == s for w in window_ids)]
+    head = ["detector"] + present
+    out = ["## Recall by price-limit regime", "",
+           "| " + " | ".join(head) + " |", "|" + "---|" * len(head)]
+    for r in results:
+        cm = r.case_metrics.assign(window_id=r.case_metrics["window_id"].astype(str))
+        cells = [r.name]
+        for st in present:
+            sub = cm[cm["window_id"].map(lambda w: strata[w] == st)]
+            n = int((sub["n_days"].fillna(0) > 0).sum())
+            cells.append(f"{_num(recall_at_k(sub))} (n={n})")
+        out.append("| " + " | ".join(cells) + " |")
+    out.append("")
+    return out
+
+
+def render_report(results: Sequence[DetectorResult], k: int, lead: int, title: str = "Evaluation",
+                  strata: Mapping[str, str] | None = None) -> str:
     window_ids = _check(results)
     out = [f"# {title}", "",
            f"Top-k with k={k}, lead={lead} trading days. Results are statistical anomaly detection "
@@ -104,5 +144,8 @@ def render_report(results: Sequence[DetectorResult], k: int, lead: int, title: s
             row += ["yes" if is_found else "no",
                     _int(m.at[wid, "first_flag_offset"]) if is_found else _NA]
         out.append("| " + " | ".join(row) + " |")
-    out += ["", NOTE, ""]
+    out.append("")
+    if strata is not None:
+        out += _strata_section(results, window_ids, strata)
+    out += [NOTE, ""]
     return "\n".join(out)

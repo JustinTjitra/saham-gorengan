@@ -49,6 +49,6 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 | P4-07 | Price-only trend-persistence detector | P4 | sonnet | P4-01, P5-03b | done | de6cd5d |
 | P5-05 | Evaluation report generator | P5 | sonnet | P5-01, P5-01b, P5-04 | done | a92e182 |
 | P5-06 | Evaluation pipeline from features and windows to report inputs | P5 | sonnet | P5-05, P4-06 | done | 34a611d |
-| P5-07 | Report recall by price-limit regime | P5 | sonnet | P5-05 | todo | |
+| P5-07 | Report recall by price-limit regime | P5 | sonnet | P5-05 | done | |
 | P6-01 | `saham-gorengan score --date` command | P6 | sonnet | P1-02, P2-09, P4-02 | done | e0807e3 |
 | P6-02 | Watchlist writer with explanations and wording rules | P6 | sonnet | P6-01 | todo | |
