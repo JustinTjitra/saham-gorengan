@@ -48,4 +48,4 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 | P4-07 | Price-only trend-persistence detector | P4 | sonnet | P4-01, P5-03b | done | |
 | P5-05 | Evaluation report generator | P5 | sonnet | P5-01, P5-01b, P5-04 | done | a92e182 |
 | P5-06 | Evaluation pipeline from features and windows to report inputs | P5 | sonnet | P5-05, P4-06 | done | |
-| P6-01 | `saham-gorengan score --date` command | P6 | sonnet | P1-02, P2-09, P4-02 | todo | |
+| P6-01 | `saham-gorengan score --date` command | P6 | sonnet | P1-02, P2-09, P4-02 | done | |
