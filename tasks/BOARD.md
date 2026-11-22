@@ -51,4 +51,4 @@ Statuses: `todo`, `doing`, `done`, `blocked`. Models: `haiku`, `sonnet`.
 | P5-06 | Evaluation pipeline from features and windows to report inputs | P5 | sonnet | P5-05, P4-06 | done | 34a611d |
 | P5-07 | Report recall by price-limit regime | P5 | sonnet | P5-05 | done | |
 | P6-01 | `saham-gorengan score --date` command | P6 | sonnet | P1-02, P2-09, P4-02 | done | e0807e3 |
-| P6-02 | Watchlist writer with explanations and wording rules | P6 | sonnet | P6-01 | todo | |
+| P6-02 | Watchlist writer with explanations and wording rules | P6 | sonnet | P6-01 | done | |
