@@ -25,6 +25,8 @@ The backfill (P1-09) needs the list of IDX tickers to fetch, including stocks th
 - (c) Ask IDX in writing for research-use permission (as in Q1), then fetch their list programmatically.
 The loop will not scrape idx.co.id (see Q1).
 
+Update (planner, 2026-11-22): P1-10 defines the file format. It is a UTF-8 CSV with header `ticker,listed,delisted,source`: ISO dates, `delisted` empty if the ticker is still listed, and a non-empty `source` (a URL or a note such as `broker export 2026-11`). An Excel "CSV UTF-8" export works. Put it in the private data repo, for example `universe.csv` at its root. Backfill (P1-09 code, already built) and the daily job (P6-03, blocked) are waiting on it.
+
 Answer:
 
 ## Resolved
