@@ -107,3 +107,14 @@ def test_bad_input():
         iforest_scores(df, components=["vol_z", "vol_z"])
     with pytest.raises(ValueError):
         iforest_scores(pd.concat([df, df.iloc[:1]]))
+
+
+def test_int64_buckets_with_na():
+    # build_features gives liq_bucket as Int64 with pd.NA during warm-up; that must not crash.
+    df, dates = _panel()
+    df["liq_bucket"] = pd.array([1] * len(df), dtype="Int64")
+    df.loc[df["date"] == dates[0], "liq_bucket"] = pd.NA
+    out = iforest_scores(df)
+    ref = iforest_scores(df.assign(liq_bucket=df["liq_bucket"].astype("float64")))
+    pd.testing.assert_frame_equal(out, ref)
+    assert out["score"].notna().any()

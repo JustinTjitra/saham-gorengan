@@ -46,7 +46,7 @@ def iforest_scores(features: pd.DataFrame, components: Sequence[str] = DEFAULT_C
     n_days = int(day_idx.max()) + 1 if len(df) else 0
     X = df[components].to_numpy()
     complete = ~np.isnan(X).any(axis=1) & df["liq_bucket"].notna().to_numpy()
-    buckets = df["liq_bucket"].astype(object).to_numpy()
+    buckets = pd.factorize(df["liq_bucket"])[0]  # NA -> -1; works for Int64 with pd.NA and for strings
     score = np.full(len(df), np.nan)
 
     refits = list(range(train_days, n_days, refit_every))
