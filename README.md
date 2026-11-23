@@ -1,6 +1,8 @@
-# WIP - saham-gorengan
+# saham-gorengan
 
-Labelled stock-manipulation cases on the Indonesia Stock Exchange (IDX), taken from OJK enforcement actions from 2016 to November 2026. Also includes the history of the exchange's auto-rejection (ARA/ARB) price limits. The CSVs are plain files you can read directly, and a small Python package (no dependencies) loads them and answers two questions:
+**Status (November 2026):** the label set and the price-limit history are finished and usable. The detection and evaluation code is built and tested on synthetic data only; nothing has been run on real market data yet. See `docs/METHOD_NOTES.md` for the method in plain language.
+
+Labelled stock-manipulation cases on the Indonesia Stock Exchange (IDX), taken from OJK enforcement actions from 2016 to November 2026. Also includes the history of the exchange's auto-rejection (ARA/ARB) price limits. The CSVs are plain files you can read directly, and a small Python package loads them (the label and price-limit loaders use only the standard library; installing the package also pulls in pandas, numpy, pyarrow and scikit-learn for the detection code) and answers two questions:
 
 - Was ticker X inside a known manipulation window on day D?
 - What were the ARA/ARB limits on day D at price P?
